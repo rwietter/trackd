@@ -95,6 +95,7 @@
 			"./node_modules/@types",
 			"./types",
 		],
+		"baseUrl": ".",
 		"types": ["jest", "node", "@types/jest", "@types/node"],
 	},
 	"include": [
