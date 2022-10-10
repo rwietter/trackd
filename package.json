@@ -16,15 +16,15 @@
 		"commit": "cz"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^17.1.2",
+		"@commitlint/config-conventional": "^17.1.0",
+		"commitizen": "^4.2.5",
+		"cz-conventional-changelog": "3.3.0",
 		"eslint-config-custom": "*",
-		"prettier": "latest",
-		"turbo": "latest",
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "3.3.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3"
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1",
+		"turbo": "^1.5.5"
 	},
 	"engines": {
 		"node": ">=14.0.0"
@@ -36,11 +36,11 @@
 			"path": "./node_modules/cz-conventional-changelog"
 		}
 	},
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "npx --no -- commitlint --edit",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  }
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "npx --no -- commitlint --edit",
+			"prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+		}
+	}
 }
