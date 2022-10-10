@@ -8,15 +8,14 @@
 	],
 	"scripts": {
 		"build": "turbo run build",
+		"start": "cd apps/server && yarn start",
 		"dev": "turbo run dev --parallel",
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
 		"docs": "docsify serve ./apps/docs -p 3333",
 		"commit": "cz",
-		"build:web": "turbo run build --filter=web",
 		"build:server": "turbo run build --filter=server",
-		"heroku-postbuild": "if [ $CLIENT_ENV ]; then yarn run prod-web; elif [ $SERVER_ENV ]; then yarn run prod-server; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
-		"prod-web": "yarn run build:web",
+		"heroku-postbuild": "yarn run prod-server",
 		"prod-server": "yarn run build:server"
 	},
 	"devDependencies": {
