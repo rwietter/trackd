@@ -10,6 +10,10 @@
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", ".next/**"]
 		},
+		"release": {
+			"dependsOn": ["^release"],
+			"outputs": []
+		},
     "lint": {
       "outputs": []
     },

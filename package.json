@@ -9,6 +9,7 @@
 	"scripts": {
 		"build": "turbo run build --scope=*server*",
 		"start": "turbo run start --scope=*server*",
+		"release": "turbo run release --scope=*server*",
 		"dev": "turbo run dev --parallel",
 		"lint": "turbo run lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",

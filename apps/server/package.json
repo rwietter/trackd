@@ -55,6 +55,7 @@
 		"test": "jest --maxWorkers=1 --bail --ci --coverage",
 		"test:ci": "jest --ci --coverage",
 		"test:watch": "jest --watch --forceExit --detectOpenHandles --maxWorkers=1",
-		"migrate": "prisma migrate dev --name init"
+		"migrate": "prisma migrate dev --name init",
+		"release": "prisma migrate deploy"
 	}
 }
