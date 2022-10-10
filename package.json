@@ -1,25 +1,45 @@
 {
-  "name": "trackraw",
-  "version": "0.0.0",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "eslint-config-custom": "*",
-    "prettier": "latest",
-    "turbo": "latest"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "dependencies": {},
-  "packageManager": "yarn@1.22.19"
+	"name": "trackraw",
+	"version": "0.0.0",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev --parallel",
+		"lint": "turbo run lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"docs": "docsify serve ./apps/docs -p 3333",
+		"commit": "cz"
+	},
+	"devDependencies": {
+		"eslint-config-custom": "*",
+		"prettier": "latest",
+		"turbo": "latest",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	},
+	"dependencies": {},
+	"packageManager": "yarn@1.22.19",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "npx --no -- commitlint --edit",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  }
 }

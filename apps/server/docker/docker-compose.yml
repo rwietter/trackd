@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  database:
+    container_name: ubs_db
+    image: postgres:13.8
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - /tmp/postgresql/db:/var/lib/postgresql/data
+      - db:/tmp/postgresql/data/
+volumes:
+  db:

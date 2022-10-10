@@ -1,0 +1,310 @@
+openapi: 3.0.0
+info:
+  description: "Test swagger specification"
+  version: "1.0.0"
+  title: "Test swagger specification"
+  contact:
+    email: "super.developer@gmail.com"
+servers:
+  - url: "http://localhost:3000"
+    description: HTTP
+paths:
+  /week-schedule:
+    get:
+      description: 'Get week schedule'
+      tags:
+        - Agenda
+      responses:
+        200:
+          description: 'Get week schedule'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string,
+                  day:
+                    type: string
+                  month:
+                    type: string
+                  year:
+                    type: string
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  weekId:
+                    type: string
+                  week:
+                    type: object
+                    id:
+                      type: string
+                    mondayRecord:
+                      type: string
+                    mondayRecordAvailable:
+                      type: string
+                    tuesdayRecord:
+                      type: string
+                    tuesdayRecordAvailable:
+                      type: string
+                    wednesdayRecord:
+                      type: string
+                    wednesdayRecordAvailable:
+                      type: string
+                    thursdayRecord:
+                      type: string
+                    thursdayRecordAvailable:
+                      type: string
+                    fridayRecord:
+                      type: string
+                    fridayRecordAvailable:
+                      type: string
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
+                example:
+                 id: cl8d955gs0018lqpuycnpdfzl
+                 success: true
+                 error: false
+                 day: '05'
+                 month: '10'
+                 year: '2022'
+                 createdAt: '2022-09-22T16:12:01.900Z'
+                 updatedAt: '2022-09-22T16:12:01.900Z'
+                 weekId: cl8d955gj0011lqpuxo7u52i4
+                 week:
+                  id: cl8d955gj0011lqpuxo7u52i4
+                  mondayRecord: '4'
+                  mondayRecordAvailable: '10'
+                  tuesdayRecord: '3'
+                  tuesdayRecordAvailable: '10'
+                  wednesdayRecord: '1'
+                  wednesdayRecordAvailable: '50'
+                  thursdayRecord: '6'
+                  thursdayRecordAvailable: '50'
+                  fridayRecord: '7'
+                  fridayRecordAvailable: '50'
+                  createdAt: '2022-09-22T16:12:01.891Z'
+                  updatedAt: '2022-09-22T16:12:01.891Z'
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  success:
+                    type: boolean
+        204: 
+          description: 'No content'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  success:
+                    type: boolean
+  /admin/signup:
+    post:
+      description: 'Create a new admin'
+      tags:
+        - Admin
+      parameters:
+        - name: name
+          in: query
+          description: Complete name of the admin to be created is required
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: Email of the admin to be created is required
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Password of the admin to be created is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Created a new admin account successfully'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  success:
+                    type: boolean
+  /admin/signin:
+    post:
+      description: 'Signin with admin credentials'
+      tags:
+        - Admin
+      parameters:
+        - name: email
+          in: query
+          description: Email of the admin logging in is required
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Password of the admin logging in is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Logged in successfully'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  token:
+                    type: string
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  success:
+                    type: boolean
+          
+  /admin/create-schedule:
+    post:
+      description: 'Create week agenda'
+      tags:
+        - Admin
+      parameters:
+        - name: day
+          in: query
+          description: Day for which agenda is required
+          required: true
+          schema:
+            type: string
+        - name: month
+          in: query
+          description: Month for which agenda is required
+          required: true
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: Year for which agenda is required
+          required: true
+          schema:
+            type: string
+        - name: week
+          in: query
+          description: Week for which agenda is required
+          required: true
+          schema:
+            type: object
+            properties:
+              mondayRecord:
+                type: string
+              tuesdayRecord:
+                type: string
+              wednesdayRecord:
+                type: string
+              thursdayRecord:
+                type: string
+              fridayRecord:
+                type: string
+        - name: weekAvailable
+          in: query
+          description: Week for which agenda is required
+          required: true
+          schema:
+            type: object
+            properties:
+              mondayRecordAvailable:
+                type: string
+              tuesdayRecordAvailable:
+                type: string
+              wednesdayRecordAvailable:
+                type: string
+              thursdayRecordAvailable:
+                type: string
+              fridayRecordAvailable:
+                type: string
+      responses:
+        200:
+          description: 'Returns agenda for a given date'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  day:
+                    type: string
+                example:
+                 success: true
+                 message: "Sucefully created schedule"
+                 statusCode: 200
+                 id: "cl88re6fm00148ipu9gt0bjqu"
+                 weekId: "cl88re6fi00068ipu8mu1qytq"
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  success:
+                    type: boolean

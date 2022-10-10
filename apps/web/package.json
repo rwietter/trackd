@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,19 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.3.1",
+    "@hookform/resolvers": "^2.9.8",
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-tabs": "^1.0.0",
+    "@stitches/react": "^1.2.8",
+    "axios": "^1.1.2",
+    "next": "12.3.0",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "ui": "*"
+    "react-hook-form": "^7.35.0",
+    "react-hot-toast": "^2.4.0",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "eslint": "7.32.0",
+    "@types/node": "18.7.18",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-custom": "*",
+    "eslint-config-next": "12.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "next-transpile-modules": "9.0.0",
     "tsconfig": "*",
-    "@types/node": "^17.0.12",
-    "@types/react": "18.0.17",
     "typescript": "^4.5.3"
   }
 }
