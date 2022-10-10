@@ -1,8 +1,9 @@
 {
-	"name": "ubs-nx",
-	"version": "1.0.0",
-	"main": "index.js",
+	"name": "server",
+	"version": "0.0.1",
+	"main": "dist/lib/server.js",
 	"license": "MIT",
+	"private": true,
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.0",
 		"@types/cors": "^2.8.12",

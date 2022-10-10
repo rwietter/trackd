@@ -1,16 +1,20 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
-	"globalDependencies": ["$PORT"],
+	"globalDependencies": [".env", "$PORT"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
+		"start": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**", ".next/**"]
+		},
     "lint": {
       "outputs": []
     },
     "dev": {
-      "cache": true
+      "cache": false
     }
   }
 }
