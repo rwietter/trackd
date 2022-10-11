@@ -108,7 +108,6 @@
 	"types": ["jest", "node", "@types/jest", "@types/node"],
 	"exclude": [
 		"node_modules",
-		"**/*.spec.ts",
-		"**/*.test.ts"
+		"./__tests__/**/*.test.ts"
 	],
 }

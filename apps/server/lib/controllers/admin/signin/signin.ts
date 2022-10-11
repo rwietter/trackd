@@ -13,7 +13,7 @@ const generate = (payload: JwtPayload) => new Promise((resolve) => {
     String(process.env.SECRET_JWT_KEY),
     (err, token) => {
       if (err) {
-        throw new Error(`ERR_INVALID_TOKEN`);
+        throw new Error('ERR_INVALID_TOKEN');
       }
       resolve(token);
     },
@@ -29,7 +29,7 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
     if (!user || user.email !== email) {
       return reply.status(404).send({
         ...error({
-          name: `ERR_USER_OR_PASSWORD_NOT_FOUND`,
+          name: 'ERR_USER_OR_PASSWORD_NOT_FOUND',
           status: 404,
         }),
       });
@@ -38,14 +38,14 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
     if (!bcrypt.compareSync(password, user.password)) {
       return reply.status(404).send({
         ...error({
-          name: `ERR_INVALID_PASSWORD`,
+          name: 'ERR_INVALID_PASSWORD',
           status: 404,
         }),
       });
     }
 
     const payload = {
-      iss: `awscare`,
+      iss: 'awscare',
       sub: user.id,
       exp: Math.floor(Date.now() / 1000) + 60 * 60,
       data: {
@@ -57,7 +57,7 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
 
     return reply.status(200).send({
       ...success({
-        name: `SUCCESS_USER_SIGNIN`,
+        name: 'SUCCESS_USER_SIGNIN',
         status: 200,
         hasError: false,
         payload: {

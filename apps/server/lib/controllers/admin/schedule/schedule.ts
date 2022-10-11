@@ -30,9 +30,10 @@ const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
     });
 
     const data = await Prisma.dentistSchedule.create({
-      data: { day, month, year, weekId: weekSchedule.id },
+      data: {
+        day, month, year, weekId: weekSchedule.id,
+      },
     });
-
     return reply.code(201).send({ success: true, data, userId });
   } catch (error: any) {
     return reply.code(404).send({ success: false, error: error.message });

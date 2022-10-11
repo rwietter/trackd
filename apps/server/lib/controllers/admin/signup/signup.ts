@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt';
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { UserData } from ".";
+import { UserData } from '.';
 import { Prisma } from '../../../config/prisma';
 import { error } from '../../../helpers/error';
 import { success } from '../../../helpers/success/success';
@@ -16,7 +16,7 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
       .status(400)
       .send({
         ...error({
-          name: `ERR_PROVIDE_EMAIL_AND_PASSWORD`,
+          name: 'ERR_PROVIDE_EMAIL_AND_PASSWORD',
           status: 400,
           hasError: true,
         }),
@@ -27,7 +27,7 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
   if (userExists) {
     return reply.status(409).send({
       ...error({
-        name: `ERR_USER_ALREADY_EXISTS`,
+        name: 'ERR_USER_ALREADY_EXISTS',
         status: 409,
         hasError: true,
       }),
@@ -47,7 +47,7 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
   if (!user) {
     return reply.status(500).send({
       ...error({
-        name: `ERR_USER_NOT_FOUND`,
+        name: 'ERR_USER_NOT_FOUND',
         status: 409,
         hasError: true,
       }),
@@ -56,7 +56,7 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
 
   return reply.status(201).send({
     ...success({
-      name: `SUCCESS_USER_CREATED`,
+      name: 'SUCCESS_USER_CREATED',
       status: 201,
       hasError: false,
     }),

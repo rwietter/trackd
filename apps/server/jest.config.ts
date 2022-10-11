@@ -24,7 +24,7 @@ export default {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: `coverage`,
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -32,7 +32,7 @@ export default {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: `v8`,
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -78,19 +78,19 @@ export default {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
-    `ts`,
-    `tsx`,
-    `js`,
-    `jsx`,
+    'ts',
+    'tsx',
+    'js',
+    'jsx',
   ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "@middlewares/(.*)": `<rootDir>/lib/middlewares/$1`,
-    "@controllers/(.*)": `<rootDir>/lib/controllers/$1`,
-    "@plugins/(.*)": `<rootDir>/lib/plugins/$1`,
-    "@config/(.*)": `<rootDir>/lib/config/$1`,
-    "@routes/(.*)": `<rootDir>/lib/routes/$1`,
+    '@middlewares/(.*)': '<rootDir>/lib/middlewares/$1',
+    '@controllers/(.*)': '<rootDir>/lib/controllers/$1',
+    '@plugins/(.*)': '<rootDir>/lib/plugins/$1',
+    '@config/(.*)': '<rootDir>/lib/config/$1',
+    '@routes/(.*)': '<rootDir>/lib/routes/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -103,7 +103,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  preset: `ts-jest`,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -147,7 +147,7 @@ export default {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: `node`,
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -157,7 +157,7 @@ export default {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    `<rootDir>/__tests__/**/**/*.(test).{js,jsx,ts,tsx}`,
+    '<rootDir>/__tests__/**/**/*.(test).{js,jsx,ts,tsx}',
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -176,7 +176,7 @@ export default {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.ts?$': `ts-jest`,
+    '^.+\\.ts?$': 'ts-jest',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

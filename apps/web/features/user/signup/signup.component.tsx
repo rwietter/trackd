@@ -14,7 +14,7 @@ import {
 import { signupSchema } from './validations';
 import { zodOptions } from '@/helpers/zod/zod-options';
 
-export const SignUp = () => {
+export function SignUp() {
   const {
     register,
     handleSubmit,
@@ -83,4 +83,4 @@ export const SignUp = () => {
       </TabsContent>
     </form>
   );
-};
+}

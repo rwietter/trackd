@@ -16,7 +16,7 @@ import { notify } from '@/helpers/notify';
 import { zodOptions } from '@/helpers/zod/zod-options';
 import { signinSchema } from './validations';
 
-export const SignIn = () => {
+export function SignIn() {
   const {
     register,
     handleSubmit,
@@ -69,4 +69,4 @@ export const SignIn = () => {
       </TabsContent>
     </form>
   );
-};
+}
