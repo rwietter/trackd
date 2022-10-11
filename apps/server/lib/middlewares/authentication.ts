@@ -9,19 +9,19 @@ const authentication = async (req: FastifyRequest, rep: FastifyReply, next: Func
     const authorizationToken = req.headers.authorization;
 
     if (!authorizationToken) {
-      throw new Error(`ERR_TOKEN_NOT_FOUND`);
+      throw new Error('ERR_TOKEN_NOT_FOUND');
     }
 
-    const tokenParts = authorizationToken.split(` `);
+    const tokenParts = authorizationToken.split(' ');
 
     if (tokenParts.length !== 2) {
-      throw new Error(`ERR_INVALID_TOKEN`);
+      throw new Error('ERR_INVALID_TOKEN');
     }
 
     const [scheme, token] = tokenParts;
 
     if (!/^Bearer$/i.test(scheme)) {
-      throw new Error(`ERR_INVALID_TOKEN`);
+      throw new Error('ERR_INVALID_TOKEN');
     }
 
     const secretKey = String(process.env.SECRET_JWT_KEY).trim();
@@ -36,7 +36,7 @@ const authentication = async (req: FastifyRequest, rep: FastifyReply, next: Func
           throw new Error(err!.message);
         }
       } catch (error) {
-        throw new Error(`ERR_EXPIRED_TOKEN`);
+        throw new Error('ERR_EXPIRED_TOKEN');
       }
     });
   } catch (error: any) {

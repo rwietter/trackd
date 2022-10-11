@@ -4,7 +4,7 @@ import path from 'path';
 
 const setupRoutes = (app: FastifyInstance) => {
   app.register(autoload, {
-    dir: path.join(__dirname, `..`, `routes`),
+    dir: path.join(__dirname, '..', 'routes'),
   });
 };
 

@@ -1,18 +1,18 @@
-import { app } from "./app";
+import { app } from './app';
 
 const PORT = Number(process.env.PORT) || 3000;
-const HOST = `0.0.0.0`;
+const HOST = '0.0.0.0';
 
 const start = async () => {
   try {
-    const response = await app.listen(
-      { port: PORT, host: HOST },
-    ) as unknown as Promise<string>;
-    console.log(`Yup!!!! Server running at ${response}`);
-  } catch (err: any) {
-    console.log(err.message);
+    await app.listen({ port: PORT, host: HOST }) as unknown as string;
+  } catch (err) {
     process.exit(1);
   }
 };
 
-start();
+start().then(() => {
+  app.log.info('Yup!!!! Server running');
+}).catch((err) => {
+  app.log.info(err);
+});

@@ -1,5 +1,5 @@
 import { FastifyCorsOptions } from '@fastify/cors';
-import { FastifyInstance } from "fastify";
+import { FastifyInstance } from 'fastify';
 import frameguard from 'frameguard';
 import xXssProtection from 'x-xss-protection';
 
@@ -8,10 +8,10 @@ import xXssProtection from 'x-xss-protection';
  */
 
 export const corsOptions: FastifyCorsOptions = {
-  origin: `*`,
+  origin: '*',
   optionsSuccessStatus: 200,
-  allowedHeaders: [`Content-Type`, `Authorization`],
-  methods: [`GET`, `POST`, `PUT`, `DELETE`],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   maxAge: 86400,
   hideOptionsRoute: true,
 };

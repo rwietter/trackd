@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build:web": "next build",
+    "start:web": "next start",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,22 +24,13 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@types/node": "18.7.18",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.39.0",
-    "@typescript-eslint/parser": "^5.39.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-custom": "*",
-    "eslint-config-next": "12.3.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.8",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "next-transpile-modules": "9.0.0",
-    "tsconfig": "*",
-    "typescript": "^4.5.3"
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
