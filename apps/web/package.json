@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:web": "next build",
-    "start:web": "next start",
+    "build": "next build",
+    "start": "next start",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "lint": "next lint"
   },
