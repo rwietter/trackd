@@ -7,11 +7,19 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
+    'airbnb-typescript',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'next/core-web-vitals',
     "plugin:react-hooks/recommended",
     'plugin:jsx-a11y/recommended',
     'plugin:sonarjs/recommended',
     'plugin:prettier/recommended',
-    "prettier"
+    "prettier",
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'turbo'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,6 +28,7 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: [`${__dirname}/tsconfig.json`],
   },
   plugins: [
     'react',
@@ -28,7 +37,8 @@ module.exports = {
     'react-hooks',
     'jsx-a11y',
     'sonarjs',
-    'prettier'
+    'prettier',
+    'import',
   ],
   rules: {
     // ------- favorite rules -------
@@ -37,6 +47,7 @@ module.exports = {
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     'newline-per-chained-call': ["error", { ignoreChainWithDepth: 1 }],
+    'no-console': 'off',
     "indent": ["error", 2, { "MemberExpression": 0, "ignoredNodes": ["JSXElement", "JSXElement *"] }],
     // ------------------------------
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],

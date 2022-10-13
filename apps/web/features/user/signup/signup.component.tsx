@@ -5,6 +5,7 @@ import { notify } from '@/helpers/notify';
 import { zodOptions } from '@/helpers/zod/zod-options';
 import { api } from '@/services/api';
 
+import { IRespError } from '../../../@types/axios';
 import {
   Button,
   Fieldset,
@@ -31,8 +32,9 @@ export function SignUp() {
       if (!response.data?.hasError) {
         notify('Conta criada com sucesso!', 'success');
       }
-    } catch (error: any) {
-      notify(error?.response?.data?.message, 'error');
+    } catch (_error) {
+      const err = _error as IRespError;
+      notify(err?.response?.data?.message, 'error');
     }
   });
 

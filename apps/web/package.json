@@ -22,5 +22,8 @@
     "react-hook-form": "^7.35.0",
     "react-hot-toast": "^2.4.0",
     "zod": "^3.19.1"
+  },
+  "devDependencies": {
+    "@types/config": "^3.3.0"
   }
 }

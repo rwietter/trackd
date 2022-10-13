@@ -10,7 +10,7 @@ export interface Item {
 export interface EditableCellProps extends HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: 'day' | 'records' | 'records_available';
-  title: any;
+  title: string;
   inputType: 'number' | 'text';
   record: Item;
   index: number;

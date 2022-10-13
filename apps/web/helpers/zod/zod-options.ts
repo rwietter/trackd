@@ -1,9 +1,14 @@
 import { UseFormProps } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-export const zodOptions = (resolver: any): Partial<UseFormProps> => ({
-  resolver: zodResolver(resolver),
+type ZodKeys = {
+  [key: string]: string;
+}
+
+export const zodOptions = <T extends z.ZodType<ZodKeys>> (schema: T): Partial<UseFormProps> => ({
+  resolver: zodResolver(schema),
   reValidateMode: 'onBlur',
   mode: 'onBlur',
   context: undefined,

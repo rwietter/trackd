@@ -96,7 +96,7 @@ export const TableRegisterRecord: FC = () => {
       title: 'Operação',
       dataIndex: 'operation',
       width: '20%',
-      render: (_: any, record: Item) => {
+      render: (_: string, record: Item) => {
         const editable = isEditing(record);
         return editable ? (
           <span>

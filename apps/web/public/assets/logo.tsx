@@ -24,10 +24,21 @@ export const Logo = () => (
         y2={16}
         gradientUnits="userSpaceOnUse"
       >
-        <stop className="ccompli1" stopColor="#64C2DB" />
-        <stop className="ccompli2" offset={0.307} stopColor="#7476ED" />
-        <stop className="ccustom" offset={0.604} stopColor="#C994DF" />
-        <stop className="ccompli1" offset={1} stopColor="#E56F8C" />
+        <stop className="ccompli1"
+          stopColor="#64C2DB"
+        />
+        <stop className="ccompli2"
+          offset={0.307}
+          stopColor="#7476ED"
+        />
+        <stop className="ccustom"
+          offset={0.604}
+          stopColor="#C994DF"
+        />
+        <stop className="ccompli1"
+          offset={1}
+          stopColor="#E56F8C"
+        />
       </linearGradient>
     </defs>
   </svg>
