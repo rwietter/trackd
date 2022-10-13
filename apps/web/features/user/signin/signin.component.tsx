@@ -1,6 +1,15 @@
+/* eslint-disable complexity */
 import { useForm } from 'react-hook-form';
-import { setCookie } from 'nookies';
+
 import { useRouter } from 'next/router';
+
+import { setCookie } from 'nookies';
+
+import { notify } from '@/helpers/notify';
+import { zodOptions } from '@/helpers/zod/zod-options';
+import { api } from '@/services/api';
+
+
 import {
   Button,
   Fieldset,
@@ -11,9 +20,6 @@ import {
   Text,
   ErrorMessage,
 } from '../styles';
-import { api } from '@/services/api';
-import { notify } from '@/helpers/notify';
-import { zodOptions } from '@/helpers/zod/zod-options';
 import { signinSchema } from './validations';
 
 export function SignIn() {

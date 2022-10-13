@@ -1,6 +1,11 @@
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import '../styles/table.css';
+import 'antd/dist/antd.css';
+
 import { ReactNode, useEffect } from 'react';
+
+import type { AppProps } from 'next/app';
+
 import { darkTheme, globalStyles, lightTheme } from '../features/ui/theme';
 
 function App({ Component, pageProps }: AppProps): ReactNode {
@@ -16,7 +21,9 @@ function App({ Component, pageProps }: AppProps): ReactNode {
 
   return (
     <div>
-      <Component {...pageProps} id="theme" />
+      <Component {...pageProps}
+        id="theme"
+      />
     </div>
   );
 }

@@ -1,0 +1,42 @@
+.editable-row .ant-form-item-explain {
+  position: absolute;
+  top: 100%;
+  font-size: 12px;
+}
+
+.ant-table-content {
+  overflow: auto;
+  font-family: Prompt;
+  font-size: 1.3rem;
+}
+
+.ant-table-content table thead tr th {
+  text-align: center;
+  font-weight: 700;
+}
+
+.ant-table-content table > tbody > tr > td {
+  text-align: center;
+}
+
+.ant-table-content table > tbody > tr > td > div > div > div > div > div > div > div.ant-input-number-input-wrap input {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.ant-popover-inner .ant-popover-message {
+  font-size: 1rem;
+}
+
+.ant-popover-inner .ant-popover-buttons {
+  font-size: 1rem;
+}
+
+/* Border */
+.ant-table-content > table > .ant-table-tbody > tr > td {
+  border: none;
+}
+
+.ant-table-content  > table > tbody > tr > td {
+  border: none !important;
+}

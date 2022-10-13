@@ -1,5 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { UseFormProps } from 'react-hook-form';
+
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const zodOptions = (resolver: any): Partial<UseFormProps> => ({
   resolver: zodResolver(resolver),

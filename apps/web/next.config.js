@@ -5,6 +5,9 @@ const nextConfig = {
   env: {
     BASE_URL: process.env.BASE_URL,
   },
+  images: {
+    domains: ['images.pexels.com', 'i.postimg.cc'],
+  },
 };
 
 module.exports = nextConfig;
