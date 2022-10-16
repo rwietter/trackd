@@ -49,6 +49,12 @@ module.exports = {
     'newline-per-chained-call': ["error", { ignoreChainWithDepth: 1 }],
     'no-console': 'off',
     "indent": ["error", 2, { "MemberExpression": 0, "ignoredNodes": ["JSXElement", "JSXElement *"] }],
+    "no-cond-assign": "error",
+    "no-constant-condition": "error",
+    "no-unreachable": "error",
+    "no-unused-expressions": "error",
+    "no-constant-binary-expression": "error",
+    "no-sequences": "error",
     // ------------------------------
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
