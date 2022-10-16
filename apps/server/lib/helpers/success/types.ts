@@ -1,6 +1,7 @@
 type ISuccessName = {
   SUCCESS_USER_CREATED: string;
   SUCCESS_USER_SIGNIN: string;
+  SUCCESS_SCHEDULE_FOUND: string;
 }
 
 export type IMapSuccessName = {

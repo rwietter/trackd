@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 
-export interface IRespError extends AxiosResponse {
+export interface ResponseError extends AxiosResponse {
   response: {
     data: {
       message: string;

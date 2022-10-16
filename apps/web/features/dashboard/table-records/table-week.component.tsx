@@ -1,20 +1,45 @@
+/* eslint-disable sonarjs/no-unused-collection */
+/* eslint-disable import-helpers/order-imports */
 import { FC, useState, useEffect } from 'react';
 
 import {
   Form, Table,
 } from 'antd';
+import { api } from '@/services/api';
 
 import {
-  IRecord, IRecordA, Item,
+  IRecord, IRecordA,
 } from '../types';
 import { EditableCell } from './edit-cell.component';
+
+import { notify } from '@/helpers/notify';
+import { Item } from '../../register-record/types';
+import { ResponseError } from '../../../@types/axios';
 
 export const TableWeek: FC = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
 
+  const fetch = async () => {
+    try {
+      const response = await api.get('/schedule');
+
+
+      if (response.status === 200) {
+        const { payload } = response.data;
+
+        const week = Object.assign([], payload);
+        setData(week);
+      }
+
+    } catch (error) {
+      const err = error as ResponseError;
+      notify(err.response?.data?.message, 'error');
+    }
+  }
+
   useEffect(() => {
-    setData([]);
+    fetch();
   }, []);
 
   const columns = [
@@ -25,20 +50,20 @@ export const TableWeek: FC = () => {
       editable: false,
     },
     {
-      title: 'Fichas',
-      dataIndex: 'records',
-      width: '20%',
-      editable: true,
-      ellipsis: true,
-      sorter: (a: IRecord, b: IRecord) => +a.records - +b.records,
-    },
-    {
       title: 'Fischas disponíveis',
       dataIndex: 'records_available',
       width: '30%',
       editable: true,
       ellipsis: true,
       sorter: (a: IRecordA, b: IRecordA) => +a.records_available - +b.records_available,
+    },
+    {
+      title: 'Fichas',
+      dataIndex: 'records',
+      width: '20%',
+      editable: true,
+      ellipsis: true,
+      sorter: (a: IRecord, b: IRecord) => +a.records - +b.records,
     },
   ];
 

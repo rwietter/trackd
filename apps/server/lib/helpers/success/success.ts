@@ -3,6 +3,7 @@ import { ISuccess, IMapSuccessName } from './types';
 const successName: IMapSuccessName = {
   SUCCESS_USER_CREATED: 'Usuário criado com sucesso',
   SUCCESS_USER_SIGNIN: 'Usuário logado com sucesso',
+  SUCCESS_SCHEDULE_FOUND: 'Dados de agendamento encontrados',
 } as const;
 
 const mapSuccess = (name: string): string => successName[name];
