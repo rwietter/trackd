@@ -48,7 +48,7 @@
 		"x-xss-protection": "^2.0.0"
 	},
 	"scripts": {
-		"dev": "tsnd -r tsconfig-paths/register lib/server.ts",
+		"dev": "tsnd --respawn lib/server.ts --watch",
 		"start": "node dist/lib/server.js",
 		"build": "tsc --outDir dist && cp lib/config/swagger.yaml dist/lib/config/",
 		"lint": "eslint 'lib/**/*.ts' --fix",

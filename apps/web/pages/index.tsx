@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
-import { SignForm } from '../features/user/sign.component';
 
+import Head from 'next/head';
+
+import { SignForm } from '../features/user/sign.component';
 import { Main } from '../features/user/styles';
 
 function Home() {
@@ -9,8 +10,12 @@ function Home() {
     <>
       <Head>
         <title>UBS Novo Xingu</title>
-        <meta name="description" content="UBS Novo Xingu" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description"
+          content="UBS Novo Xingu"
+        />
+        <link rel="icon"
+          href="/favicon.ico"
+        />
       </Head>
 
       <Main>

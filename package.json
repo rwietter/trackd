@@ -20,18 +20,19 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-conventional": "^17.1.0",
-		"@turbo/codemod": "^1.5.5",
+		"@turbo/codemod": "^1.5.6",
 		"commitizen": "^4.2.5",
 		"cz-conventional-changelog": "3.3.0",
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
-		"prettier": "^2.7.1",
-		"turbo": "^1.5.5"
+		"turbo": "^1.5.6"
 	},
 	"engines": {
 		"node": ">=14.0.0"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"antd": "^4.23.5"
+	},
 	"packageManager": "yarn@1.22.19",
 	"config": {
 		"commitizen": {
