@@ -6,6 +6,7 @@ type IErrorName = {
   ERR_USER_ALREADY_EXISTS: string;
   ERR_PROVIDE_EMAIL_AND_PASSWORD: string;
   ERR_USER_NOT_FOUND: string;
+  ERR_SCHEDULE_DATA_NOT_FOUND: string;
 }
 
 export type IMapErrorName = {

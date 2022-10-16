@@ -1,11 +1,11 @@
+import { SignIn } from './signin';
+import { SignUp } from './signup';
 import {
   Box,
   Tabs,
   TabsList,
   TabsTrigger,
 } from './styles';
-import { SignIn } from './signin';
-import { SignUp } from './signup';
 
 function SignForm() {
   return (

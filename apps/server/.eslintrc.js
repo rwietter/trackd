@@ -5,7 +5,7 @@ module.exports = {
 		es2021: true,
 	},
 	extends: [
-		'airbnb-base',
+    'airbnb-base',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -17,7 +17,13 @@ module.exports = {
 	plugins: [
 		'@typescript-eslint',
 	],
-	rules: {
+  rules: {
+    "no-cond-assign": "error",
+    "no-constant-condition": "error",
+    "no-unreachable": "error",
+    "no-unused-expressions": "error",
+    "no-constant-binary-expression": "error",
+    "no-sequences": "error",
 		"import/extensions": [
 			"error",
 			"ignorePackages",
@@ -36,8 +42,8 @@ module.exports = {
 		},
 		'import/resolver': {
 			node: {
-				paths: ['lib'],
-				extensions: ['.ts'],
+				paths: ['.'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
 			},
 		},
 	},

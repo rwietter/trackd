@@ -8,6 +8,7 @@ const errorName: IMapErrorName = {
   ERR_USER_ALREADY_EXISTS: 'Este usuário já está cadastrado',
   ERR_PROVIDE_EMAIL_AND_PASSWORD: 'Por favor, forneça um email e senha válidos',
   ERR_USER_NOT_FOUND: 'Usuário não encontrado',
+  ERR_SCHEDULE_DATA_NOT_FOUND: 'Dados de agendamento não encontrados',
 } as const;
 
 const mapError = (name: string): string => errorName[name] || 'Erro não identificado';

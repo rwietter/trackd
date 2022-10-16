@@ -1,6 +1,11 @@
+/* eslint-disable complexity */
 import { useForm } from 'react-hook-form';
+
 import { notify } from '@/helpers/notify';
+import { zodOptions } from '@/helpers/zod/zod-options';
 import { api } from '@/services/api';
+
+import { ResponseError } from '../../../@types/axios';
 import {
   Button,
   Fieldset,
@@ -12,7 +17,6 @@ import {
   ErrorMessage,
 } from '../styles';
 import { signupSchema } from './validations';
-import { zodOptions } from '@/helpers/zod/zod-options';
 
 export function SignUp() {
   const {
@@ -28,8 +32,9 @@ export function SignUp() {
       if (!response.data?.hasError) {
         notify('Conta criada com sucesso!', 'success');
       }
-    } catch (error: any) {
-      notify(error?.response?.data?.message, 'error');
+    } catch (_error) {
+      const err = _error as ResponseError;
+      notify(err?.response?.data?.message, 'error');
     }
   });
 
@@ -57,7 +62,7 @@ export function SignUp() {
             {...register('email')}
           />
           {errors.email && (
-          <ErrorMessage>Please, enter a valid email address</ErrorMessage>
+            <ErrorMessage>Please, enter a valid email address</ErrorMessage>
           )}
         </Fieldset>
         <Fieldset>
@@ -70,13 +75,15 @@ export function SignUp() {
             {...register('password')}
           />
           {errors.password && (
-          <ErrorMessage>
-            Passwords must be six or more characteres
-          </ErrorMessage>
+            <ErrorMessage>
+              Passwords must be six or more characteres
+            </ErrorMessage>
           )}
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: 'flex-end' }}>
-          <Button variant="green" type="submit">
+          <Button variant="green"
+            type="submit"
+          >
             Cadastrar
           </Button>
         </Flex>
