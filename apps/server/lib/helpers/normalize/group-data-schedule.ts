@@ -16,9 +16,9 @@ const normalizeSchedule = (weekSchedule: WeekSchedule) => {
   const records: IRecord[] = [];
 
   Object.entries(weekSchedule).map(([key, value]) => {
-    if (!key.includes('Record')) return {};
+    if (!key.includes('_record')) return {};
 
-    if (key.match('Available')) recordAvailables.push({ recordAvailable: value.toString() });
+    if (key.match('_record_available')) recordAvailables.push({ recordAvailable: value.toString() });
     else records.push({ record: value.toString() });
 
     return {};

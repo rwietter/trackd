@@ -1,5 +1,9 @@
+/* eslint-disable import/order */
 import { FC, Key, useState } from 'react';
 
+import { parseCookies } from 'nookies';
+
+import { api } from '@/services/api';
 import {
   Form, Popconfirm, Table, Typography,
 } from 'antd';
@@ -9,7 +13,7 @@ import {
 } from '../types';
 import { EditableCell } from './edit-cell.component';
 
-const week: IWeek = {
+const weekDay: IWeek = {
   0: 'Segunda',
   1: 'Terça',
   2: 'Quarta',
@@ -21,7 +25,7 @@ const originData: Item[] = [];
 for (let i = 0; i < 5; i++) {
   originData.push({
     key: i.toString(),
-    day: week[i],
+    day: weekDay[i],
     records: `${i}`,
     records_available: `${i + 1}`,
   });
@@ -29,7 +33,7 @@ for (let i = 0; i < 5; i++) {
 
 export const TableRegisterRecord: FC = () => {
   const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
+  const [data, setData] = useState<Item[]>(originData);
   const [editingKey, setEditingKey] = useState('');
 
   const isEditing = (record: Item) => record.key === editingKey;
@@ -140,9 +144,58 @@ export const TableRegisterRecord: FC = () => {
     };
   });
 
+  const tradWeek = {
+    'Segunda': 'monday',
+    'Terça': 'tuesday',
+    'Quarta': 'wednesday',
+    'Quinta': 'thursday',
+    'Sexta': 'friday',
+  } as const
+
+
+  const handleSubmitForm = async () => { 
+    const week = data.reduce((acc, { day, records }: Item) => {
+      const typeDay = day as keyof typeof tradWeek
+      return { ...acc, [tradWeek[typeDay]]: records };
+    }, {})
+
+    const weekAvailable = data.reduce((acc, { day, records_available }: Item) => {
+      const typeDay = day as keyof typeof tradWeek
+      return { ...acc, [tradWeek[typeDay]]: records_available };
+    }, {})
+
+    const payload = {
+      week,
+      weekAvailable,
+      day: '19',
+      month: '10',
+      year: '2022',
+    }
+
+    const token = parseCookies(null, 'auth::token')['auth::token'];
+
+    if (!token) {
+      // !TODO: handle error
+      return;
+    }
+
+    try {
+      const response = await api.post('/admin/create-schedule', payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      console.log(response)
+    } catch (error) {
+      // !TODO: handle error
+      console.log(error)
+    }
+  }
+
   return (
     <Form form={form}
       component={false}
+      onSubmitCapture={() => save(editingKey)}
     >
       <Table
         components={{
@@ -156,6 +209,11 @@ export const TableRegisterRecord: FC = () => {
         rowClassName="editable-row"
         pagination={false}
       />
+      <button type='submit'
+        onClick={handleSubmitForm}
+      >
+        Salvar
+      </button>
     </Form>
   );
 };
