@@ -1,8 +1,12 @@
+/* eslint-disable consistent-return */
+/* eslint-disable complexity */
 /* eslint-disable import/order */
 import { FC, Key, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import { parseCookies } from 'nookies';
 
+import { notify } from '@/helpers/notify';
 import { api } from '@/services/api';
 import {
   Form, Popconfirm, Table, Typography,
@@ -31,7 +35,11 @@ for (let i = 0; i < 5; i++) {
   });
 }
 
-export const TableRegisterRecord: FC = () => {
+interface IProps {
+  date: string;
+}
+
+export const TableRegisterRecord: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
   const [data, setData] = useState<Item[]>(originData);
   const [editingKey, setEditingKey] = useState('');
@@ -153,42 +161,49 @@ export const TableRegisterRecord: FC = () => {
   } as const
 
 
-  const handleSubmitForm = async () => { 
-    const week = data.reduce((acc, { day, records }: Item) => {
-      const typeDay = day as keyof typeof tradWeek
-      return { ...acc, [tradWeek[typeDay]]: records };
-    }, {})
-
-    const weekAvailable = data.reduce((acc, { day, records_available }: Item) => {
-      const typeDay = day as keyof typeof tradWeek
-      return { ...acc, [tradWeek[typeDay]]: records_available };
-    }, {})
-
-    const payload = {
-      week,
-      weekAvailable,
-      day: '19',
-      month: '10',
-      year: '2022',
-    }
-
-    const token = parseCookies(null, 'auth::token')['auth::token'];
-
-    if (!token) {
-      // !TODO: handle error
-      return;
-    }
-
+  const handleSubmitForm = async () => {
     try {
+      if (!date) {
+        return notify('Selecione uma data', 'error');
+      }
+
+      const week = data.reduce((acc, { day, records }: Item) => {
+        const typeDay = day as keyof typeof tradWeek
+        return { ...acc, [tradWeek[typeDay]]: records };
+      }, {})
+
+      const weekAvailable = data.reduce((acc, { day, records_available }: Item) => {
+        const typeDay = day as keyof typeof tradWeek
+        return { ...acc, [tradWeek[typeDay]]: records_available };
+      }, {})
+
+      const payload = {
+        week,
+        weekAvailable,
+        date
+      }
+
+      const token = parseCookies(null, 'auth::token')['auth::token'];
+
+      if (!token) {
+        return notify('Token de autenticação inválido', 'error');
+      }
+
+    
       const response = await api.post('/admin/create-schedule', payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
-      console.log(response)
-    } catch (error) {
-      // !TODO: handle error
-      console.log(error)
+      
+      if (response.status === 201) { 
+        return notify('Dados salvos com sucesso', 'success');
+      }
+
+    } catch (err) {
+      const error = err as any;
+      console.log(error.response.data.error)
+      return notify(error.response.data.message, 'error');
     }
   }
 
@@ -197,6 +212,7 @@ export const TableRegisterRecord: FC = () => {
       component={false}
       onSubmitCapture={() => save(editingKey)}
     >
+      <Toaster />
       <Table
         components={{
           body: {

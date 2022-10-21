@@ -4,7 +4,7 @@ import JWT from 'jsonwebtoken';
 
 import { JwtPayload } from '.';
 import { Prisma } from '../../../config/prisma';
-import { error } from '../../../helpers/error/error';
+import { Kaboom } from '../../../helpers';
 import { success } from '../../../helpers/success/success';
 
 const generate = (payload: JwtPayload) => new Promise((resolve) => {
@@ -28,7 +28,7 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
 
     if (!user || user.email !== email) {
       return reply.status(404).send({
-        ...error({
+        ...Kaboom({
           name: 'ERR_USER_OR_PASSWORD_NOT_FOUND',
           status: 404,
         }),
@@ -37,7 +37,7 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
 
     if (!bcrypt.compareSync(password, user.password)) {
       return reply.status(404).send({
-        ...error({
+        ...Kaboom({
           name: 'ERR_INVALID_PASSWORD',
           status: 404,
         }),
@@ -67,7 +67,7 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
     });
   } catch (errorObj: any) {
     return reply.status(400).send({
-      ...error({
+      ...Kaboom({
         name: errorObj.message,
         status: 400,
         hasError: true,

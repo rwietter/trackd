@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable sonarjs/no-unused-collection */
 /* eslint-disable import-helpers/order-imports */
 import { FC, useState, useEffect } from 'react';
@@ -16,13 +17,21 @@ import { notify } from '@/helpers/notify';
 import { Item } from '../../register-record/types';
 import { ResponseError } from '../../../@types/axios';
 
-export const TableWeek: FC = () => {
+interface IProps {
+  date: string;
+}
+
+export const TableWeek: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
 
   const fetch = async () => {
     try {
-      const response = await api.get('/schedule');
+      const response = await api.get('/schedule', {
+        params: {
+          date,
+        }
+      });
 
 
       if (response.status === 200) {
@@ -33,6 +42,7 @@ export const TableWeek: FC = () => {
       }
 
     } catch (error) {
+      setData([]);
       const err = error as ResponseError;
       notify(err.response?.data?.message, 'error');
     }
@@ -40,7 +50,7 @@ export const TableWeek: FC = () => {
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [fetch]);
 
   const columns = [
     {
