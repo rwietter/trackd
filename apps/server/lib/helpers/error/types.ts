@@ -14,10 +14,9 @@ export type IMapErrorName = {
 }
 
 export interface IError {
-  status: 200 | 201 | 400 | 404 | 409 | 500, // http rest error status
   message?: string, // message error
   name: keyof IErrorName, // error name
+  ok: boolean, // if error is ok
   code?: string, // code docs error
   more_info?: string // url for help
-  hasError?: boolean // if has error
  }

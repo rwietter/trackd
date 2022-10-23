@@ -4,8 +4,7 @@ import JWT from 'jsonwebtoken';
 
 import { JwtPayload } from '.';
 import { Prisma } from '../../../config/prisma';
-import { error } from '../../../helpers/error/error';
-import { success } from '../../../helpers/success/success';
+import { Kaboom } from '../../../helpers';
 
 const generate = (payload: JwtPayload) => new Promise((resolve) => {
   JWT.sign(
@@ -27,25 +26,15 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
     const user = await Prisma.admin.findUnique({ where: { email } });
 
     if (!user || user.email !== email) {
-      return reply.status(404).send({
-        ...error({
-          name: 'ERR_USER_OR_PASSWORD_NOT_FOUND',
-          status: 404,
-        }),
-      });
+      throw new Error('ERR_USER_OR_PASSWORD_NOT_FOUND');
     }
 
     if (!bcrypt.compareSync(password, user.password)) {
-      return reply.status(404).send({
-        ...error({
-          name: 'ERR_INVALID_PASSWORD',
-          status: 404,
-        }),
-      });
+      throw new Error('ERR_INVALID_PASSWORD');
     }
 
     const payload = {
-      iss: 'awscare',
+      iss: 'daydent',
       sub: user.id,
       exp: Math.floor(Date.now() / 1000) + 60 * 60,
       data: {
@@ -56,21 +45,17 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
     const jwtToken = await generate(payload);
 
     return reply.status(200).send({
-      ...success({
-        name: 'SUCCESS_USER_SIGNIN',
-        status: 200,
-        hasError: false,
-        payload: {
-          token: jwtToken,
-        },
-      }),
+      name: 'SUCCESS_USER_SIGNIN',
+      ok: true,
+      payload: {
+        token: jwtToken,
+      },
     });
-  } catch (errorObj: any) {
+  } catch (err: any) {
     return reply.status(400).send({
-      ...error({
-        name: errorObj.message,
-        status: 400,
-        hasError: true,
+      ...Kaboom({
+        name: err.message,
+        ok: false,
       }),
     });
   }

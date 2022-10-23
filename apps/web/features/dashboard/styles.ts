@@ -12,10 +12,3 @@ export const Title = styled('h1', {
   fontWeight: 700,
   color: '#303778',
 });
-
-export const Description = styled('p', {
-  fontSize: '1.5rem',
-  fontFamily: 'Prompt',
-  fontWeight: 700,
-  color: '#303778',
-});

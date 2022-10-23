@@ -13,10 +13,10 @@ const errorName: IMapErrorName = {
 
 const mapError = (name: string): string => errorName[name] || 'Erro não identificado';
 
-export const error = (errorObject: IError): IError => ({
-  message: errorObject.message || mapError(errorObject.name),
+export const Kaboom = (errorObject: IError): IError => ({
+  message: mapError(errorObject.name),
   name: errorObject.name,
-  status: errorObject.status,
+  ok: errorObject.ok,
   more_info: errorObject.more_info,
   code: errorObject.code,
 });
