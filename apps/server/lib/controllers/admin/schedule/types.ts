@@ -7,7 +7,8 @@ export type WeekSchedule = {
 }
 
 export type HttpPayload = {
-  date: string;
+  isoWeek: string;
+  isoYear: string;
   week: WeekSchedule;
   weekAvailable: WeekSchedule;
   userId: string;

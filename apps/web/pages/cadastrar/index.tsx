@@ -1,47 +1,31 @@
-/* eslint-disable import/order */
-/* eslint-disable no-underscore-dangle */
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 
+import { Divider } from 'antd';
+
+import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
-import { TableRegisterRecord } from '@/features/register-record';
-import { Header, Title } from '@/features/register-record/styles';
-import { DatePicker } from 'antd';
+import { TableRegisterRecord } from '@/features/create-record';
+import { Header, Title } from '@/features/create-record/styles';
+import { useIsoWeek } from '@/hooks/useIsoWeek';
 
 type IProps = {
   children: ReactNode;
 }
 
-// const initialDate = new Date()
-// .toLocaleDateString('pt-BR')
-// .toString();
-
-interface ChangeDate {
-  _d: string;
-}
-
 const RegisterRecord: FC<IProps> = () => {
-  const [date, setDate] = useState('');
+  const [date, onChangeDate, disableDates] = useIsoWeek();
 
-  const onChangeDate = (value: ChangeDate) => {
-    if (value?._d) {
-      const [parsedDate] = new Date(value?._d)
-      .toISOString()
-      .split('T');
-      console.log(parsedDate)
-      setDate(parsedDate);
-    }
-  }
   return (
     <Layout>
       <Header>
         <Title>Agenda</Title>
         <DatePicker
-          onChange={onChangeDate as (date: unknown) => void}
-          format="DD/MM/YYYY"
-          size='large'
+          onChangeDate={onChangeDate}
+          disableDate={disableDates as (curr: unknown) => boolean[]}
         />
       </Header>
       <TableRegisterRecord date={date} />
+      <Divider />
     </Layout>
   )
 }

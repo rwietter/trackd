@@ -33,9 +33,10 @@ model WeekSchedule {
   thursdayRecordAvailable  String           @map("thursday_record_available")
   fridayRecord             String           @map("friday_record")
   fridayRecordAvailable    String           @map("friday_record_available")
+  isoWeek                  String           @map("iso_week")
+  isoYear                  String           @map("iso_year")
   createdAt                DateTime         @default(now()) @map("created_at")
   updatedAt                DateTime         @updatedAt @map("updated_at")
-  date                     String           @unique @map("date")
   DentistSchedule          DentistSchedule?
 
   @@map("week_schedule")

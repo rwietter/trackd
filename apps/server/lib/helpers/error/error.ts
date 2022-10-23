@@ -14,9 +14,9 @@ const errorName: IMapErrorName = {
 const mapError = (name: string): string => errorName[name] || 'Erro não identificado';
 
 export const Kaboom = (errorObject: IError): IError => ({
-  message: errorObject.message || mapError(errorObject.name),
+  message: mapError(errorObject.name),
   name: errorObject.name,
-  status: errorObject.status,
+  ok: errorObject.ok,
   more_info: errorObject.more_info,
   code: errorObject.code,
 });

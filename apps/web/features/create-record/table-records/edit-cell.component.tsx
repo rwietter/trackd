@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import { Form, Input, InputNumber } from 'antd';
 
-import { EditableCellProps } from '../types';
+import { EditableCellProps } from './types';
 
 const InputType = {
   day: <Input />,
@@ -14,7 +14,7 @@ const InputType = {
   records_available: <InputNumber
     min={0}
     max={100}
-  />,
+  />
 };
 
 export const EditableCell: FC<EditableCellProps> = ({
@@ -41,7 +41,7 @@ export const EditableCell: FC<EditableCellProps> = ({
               message: `Please Input ${title}!`,
             },
           ]}
-          >
+        >
           {inputNode}
         </Form.Item>
       ) : (

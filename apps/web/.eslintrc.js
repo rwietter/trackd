@@ -43,10 +43,10 @@ module.exports = {
   rules: {
     // ------- favorite rules -------
     "react/jsx-indent": ["error", 2],
-    "react/jsx-max-props-per-line": [1, { maximum: 1  }],
+    "react/jsx-max-props-per-line": [1, { maximum: 2  }],
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
-    'newline-per-chained-call': ["error", { ignoreChainWithDepth: 1 }],
+    'newline-per-chained-call': ["error", { ignoreChainWithDepth: 3 }],
     'no-console': 'off',
     "indent": ["error", 2, { "MemberExpression": 0, "ignoredNodes": ["JSXElement", "JSXElement *"] }],
     "no-cond-assign": "error",
@@ -76,7 +76,7 @@ module.exports = {
     complexity: [
       'warn',
       {
-        max: 3,
+        max: 6,
       },
     ],
     eqeqeq: ['error', 'smart'],
@@ -102,49 +102,12 @@ module.exports = {
         groups: [
           '/^react/',
           '/^next/',
+          '/^antd/',
+          '/^@types/',
+          '/^/@services/',
           '/^nookies/',
           '/^@module/',
           'module',
-          `/^
-          (assert
-          |async_hooks
-          |buffer
-          |child_process
-          |cluster
-          |console
-          |constants
-          |crypto
-          |dgram
-          |dns
-          |domain
-          |events
-          |fs
-          |http
-          |http2
-          |https
-          |inspector
-          |module
-          |net
-          |os
-          |path
-          |perf_hooks
-          |process
-          |punycode
-          |querystring
-          |readline
-          |repl
-          |stream
-          |string_decoder
-          |timers
-          |tls
-          |trace_events
-          |tty
-          |url
-          |util
-          |v8
-          |vm
-          |zli
-          )/`,
         ],
         alphabetize: {
           order: 'asc',
@@ -152,6 +115,7 @@ module.exports = {
         },
       },
     ],
+    "@typescript-eslint/no-explicit-any": "off",
   },
   settings: {
     'import/parsers': {

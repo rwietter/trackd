@@ -1,33 +1,36 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { HttpPayload } from '.';
+import { HttpPayload } from './types';
 import { Prisma } from '../../../config/prisma';
 
 const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
     const {
       week,
-      date,
+      isoWeek,
+      isoYear,
       weekAvailable,
     }: HttpPayload = req.body as HttpPayload;
 
-    if (!week || !weekAvailable || !date) {
-      throw new Error('Missing required fields');
+    if (!week || !weekAvailable || !isoWeek || !isoYear) {
+      throw new Error('ERR_MISSING_REQUIRED_FIELDS');
     }
 
     const existsSchedule = await Prisma.weekSchedule.count({
       where: {
-        date,
+        isoWeek: String(isoWeek),
+        isoYear: String(isoYear),
       },
     });
 
     if (existsSchedule >= 1) {
-      throw new Error('Schedule already exists');
+      throw new Error('ERR_SCHEDULE_ALREADY_EXISTS');
     }
 
     const weekSchedule = await Prisma.weekSchedule.create({
       data: {
-        date,
+        isoWeek,
+        isoYear,
         mondayRecord: `${week.monday}`,
         tuesdayRecord: `${week.tuesday}`,
         wednesdayRecord: `${week.wednesday}`,
@@ -42,7 +45,7 @@ const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
     });
 
     if (!weekSchedule) {
-      throw new Error('Failed to create schedule');
+      throw new Error('ERR_FAILED_TO_CREATE_SCHEDULE');
     }
 
     const data = await Prisma.dentistSchedule.create({
@@ -52,13 +55,12 @@ const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
     });
 
     if (!data) {
-      throw new Error('Could not create schedule');
+      throw new Error('ERR_COULD_NOT_CREATE_SCHEDULE');
     }
 
-    return reply.code(201).send({ success: true, data });
+    return reply.code(201).send({ ok: true, data });
   } catch (error: any) {
-    console.log(error);
-    return reply.code(404).send({ success: false, message: error.message });
+    return reply.code(404).send({ ok: false, message: error.message });
   }
 };
 

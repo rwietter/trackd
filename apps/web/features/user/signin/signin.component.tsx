@@ -5,12 +5,11 @@ import { useRouter } from 'next/router';
 
 import { setCookie } from 'nookies';
 
-import { notify } from '@/helpers/notify';
+import { tryUtils } from '@/helpers/utils';
 import { zodOptions } from '@/helpers/zod/zod-options';
 import { api } from '@/services/api';
 
 
-import { ResponseError } from '../../../@types/axios';
 import {
   Button,
   Fieldset,
@@ -34,14 +33,23 @@ export function SignIn() {
 
   const submit = handleSubmit(async (data) => {
     try {
-      const response = await api.post('/admin/signin', { ...data });
-      if (!response.data?.hasError) {
-        setCookie(null, 'auth::token', response.data?.payload?.token);
-        router.push('/admin');
+      const response = await api.post('/admin/signin', { 
+        email: data.email,
+        password: data.password,
+        name: data.name,
+      });
+
+      if (response.data.ok) {
+        setCookie(null, 'auth::token', response.data.payload?.token);
+        router.push('/dashboard');
       }
-    } catch (_error) {
-      const err = _error as ResponseError;
-      notify(err?.response?.data?.message, 'error');
+
+    } catch (err: any) {
+      if (err.response) {
+        tryUtils.handleError(err.response?.data?.message);
+        return;
+      }
+      console.log(err.message);
     }
   });
 

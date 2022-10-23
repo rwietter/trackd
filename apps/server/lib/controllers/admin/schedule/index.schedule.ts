@@ -1,47 +1,40 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { Kaboom, success, normalizeSchedule } from '../../../helpers';
+import { Kaboom, normalizeSchedule } from '../../../helpers';
 import { Prisma } from '../../../config/prisma';
 
 const indexSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
-    const { date } = req.query as { date: string };
+    const { isoWeek, isoYear } = req.query as { isoWeek: string, isoYear: string };
 
-    if (!date) {
-      throw new Error('Missing required date field');
+    if (!isoWeek || !isoYear) {
+      throw new Error('ERR_MISSING_REQUIRED_FIELDS');
     }
 
     const schedule = await Prisma.weekSchedule.findFirst({
       where: {
-        date,
+        isoWeek: String(isoWeek),
+        isoYear: String(isoYear),
       },
     });
 
     if (!schedule) {
-      return reply
-        .status(404)
-        .send({
-          ...Kaboom(
-            { name: 'ERR_SCHEDULE_DATA_NOT_FOUND', status: 404 },
-          ),
-        });
+      throw new Error('ERR_SCHEDULE_DATA_NOT_FOUND');
     }
 
     const normalizedSchedule = normalizeSchedule(schedule);
 
     return reply.code(200).send({
-      ...success({
-        name: 'SUCCESS_SCHEDULE_FOUND',
-        status: 200,
-        payload: {
-          ...normalizedSchedule,
-        },
-      }),
+      name: 'SUCCESS_SCHEDULE_FOUND',
+      ok: true,
+      payload: {
+        ...normalizedSchedule,
+      },
     });
-  } catch (_err) {
+  } catch (err: any) {
     return reply.code(404).send({
       ...Kaboom({
-        name: 'ERR_SCHEDULE_DATA_NOT_FOUND',
-        status: 404,
+        name: err.message,
+        ok: false,
       }),
     });
   }

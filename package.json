@@ -11,6 +11,7 @@
 		"start": "turbo run start --scope=*server*",
 		"release": "turbo run release --scope=*server*",
 		"test": "cd apps/server && yarn test",
+    "covarage": "cd apps/server && yarn test --coverage",
 		"dev": "turbo run dev --parallel",
 		"lint": "eslint --ext .tsx,.ts apps/",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",

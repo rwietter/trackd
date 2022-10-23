@@ -8,12 +8,16 @@ describe('GET Week Schedule route', () => {
   });
 
   it('should return this json structure', async () => {
-    const response = await app.inject({
+    const response: any = await app.inject({
       method: 'GET',
-      url: 'http://localhost:8396/week-schedule',
+      url: 'http://localhost:8396/schedule',
+      query: {
+        isoWeek: '44',
+        isoYear: '2023',
+      },
     });
 
-    expect(response.statusCode).toBe(200);
+    expect(response.json().ok).toBe(true);
   });
 
   afterAll(async () => {

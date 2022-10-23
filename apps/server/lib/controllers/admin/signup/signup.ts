@@ -5,62 +5,46 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 import { UserData } from '.';
 import { Prisma } from '../../../config/prisma';
 import { Kaboom } from '../../../helpers';
-import { success } from '../../../helpers/success/success';
 
 const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
-  const { email, password, name } = req.body as UserData;
+  try {
+    const { email, password, name } = req.body as UserData;
 
-  // check if password and email and name are provided
-  if (!email || !password || !name) {
-    return reply
-      .status(400)
-      .send({
-        ...Kaboom({
-          name: 'ERR_PROVIDE_EMAIL_AND_PASSWORD',
-          status: 400,
-          hasError: true,
-        }),
-      });
-  }
+    if (!email || !password || !name) {
+      throw new Error('ERR_PROVIDE_EMAIL_AND_PASSWORD');
+    }
 
-  const userExists = await Prisma.admin.findUnique({ where: { email } });
-  if (userExists) {
-    return reply.status(409).send({
-      ...Kaboom({
-        name: 'ERR_USER_ALREADY_EXISTS',
-        status: 409,
-        hasError: true,
-      }),
+    const userExists = await Prisma.admin.findUnique({ where: { email } });
+    if (userExists) {
+      throw new Error('ERR_USER_ALREADY_EXISTS');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await Prisma.admin.create({
+      data: {
+        email,
+        password: hashedPassword,
+        name,
+      },
     });
-  }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+    if (!user) {
+      throw new Error('ERR_USER_NOT_FOUND');
+    }
 
-  const user = await Prisma.admin.create({
-    data: {
-      email,
-      password: hashedPassword,
-      name,
-    },
-  });
-
-  if (!user) {
-    return reply.status(500).send({
-      ...Kaboom({
-        name: 'ERR_USER_NOT_FOUND',
-        status: 409,
-        hasError: true,
-      }),
-    });
-  }
-
-  return reply.status(201).send({
-    ...success({
+    return reply.status(201).send({
       name: 'SUCCESS_USER_CREATED',
-      status: 201,
-      hasError: false,
-    }),
-  });
+      ok: true,
+    });
+  } catch (err: any) {
+    return reply.status(400).send({
+      ...Kaboom({
+        name: err.message,
+        ok: false,
+      }),
+    });
+  }
 };
 
 export { signUp };
