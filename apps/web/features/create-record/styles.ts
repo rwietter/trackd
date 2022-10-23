@@ -4,18 +4,13 @@ export const Header = styled('header', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  paddingBottom: '1rem',
+  fontFamily: 'Raleway',
 });
 
 export const Title = styled('h1', {
+  all: 'unset',
   fontSize: '2rem',
-  fontFamily: 'Raleway',
-  fontWeight: 700,
-  color: '#303778',
-});
-
-export const Description = styled('p', {
-  fontSize: '1.5rem',
-  fontFamily: 'Prompt',
   fontWeight: 700,
   color: '#303778',
 });

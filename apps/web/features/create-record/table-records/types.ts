@@ -18,7 +18,11 @@ export interface EditableCellProps extends HTMLAttributes<HTMLElement> {
 }
 
 export type IWeek = {
-  [key: string]: 'Segunda' | 'Terça' | 'Quarta' | 'Quinta' | 'Sexta' | 'Sábado' | 'Domingo';
+  [key: string]: 'Segunda' | 'Terça' | 'Quarta' | 'Quinta' | 'Sexta';
+}
+
+export type ITradWeek = {
+  [key: string]: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday';
 }
 
 export type IRecord = {

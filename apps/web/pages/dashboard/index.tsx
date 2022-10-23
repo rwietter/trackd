@@ -1,25 +1,31 @@
 import { FC, ReactNode } from 'react';
 
+import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
 import { TableWeek } from '@/features/dashboard';
-import { Description, HeaderDashboard, Title } from '@/features/dashboard/styles';
+import {  HeaderDashboard, Title } from '@/features/dashboard/styles';
+import { useIsoWeek } from '@/hooks/useIsoWeek';
+
 
 type IProps = {
   children: ReactNode;
 }
 
-const date = new Date()
-.toLocaleDateString('pt-BR')
-.toString();
+const Dashboard: FC<IProps> = () => {
+  const [date, onChangeDate, disableDate] = useIsoWeek();
 
-const Dashboard: FC<IProps> = () => (
-  <Layout>
-    <HeaderDashboard>
-      <Title>Semana atual</Title>
-      <Description>{date}</Description>
-    </HeaderDashboard>
-    <TableWeek />
-  </Layout>
-);
+  return (
+    <Layout>
+      <HeaderDashboard>
+        <Title>Semana atual</Title>
+        <DatePicker
+          onChangeDate={onChangeDate}
+          disableDate={disableDate as (curr: unknown) => boolean[]}
+        />
+      </HeaderDashboard>
+      <TableWeek date={date} />
+    </Layout>
+  )
+}
 
 export default Dashboard;

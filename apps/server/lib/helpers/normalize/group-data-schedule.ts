@@ -18,7 +18,7 @@ const normalizeSchedule = (weekSchedule: WeekSchedule) => {
   Object.entries(weekSchedule).map(([key, value]) => {
     if (!key.includes('Record')) return {};
 
-    if (key.match('Available')) recordAvailables.push({ recordAvailable: value.toString() });
+    if (key.match('RecordAvailable')) recordAvailables.push({ recordAvailable: value.toString() });
     else records.push({ record: value.toString() });
 
     return {};

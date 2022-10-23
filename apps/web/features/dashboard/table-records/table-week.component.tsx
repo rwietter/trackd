@@ -1,46 +1,63 @@
-/* eslint-disable sonarjs/no-unused-collection */
-/* eslint-disable import-helpers/order-imports */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useState, useEffect } from 'react';
 
-import {
-  Form, Table,
-} from 'antd';
+import { Form, Table } from 'antd';
+
+import { Spinner } from '@/components/spinner'
+import { tryUtils } from '@/helpers/utils';
 import { api } from '@/services/api';
 
-import {
-  IRecord, IRecordA,
-} from '../types';
-import { EditableCell } from './edit-cell.component';
+import { Item, IRecord, IRecordA } from '../types';
 
-import { notify } from '@/helpers/notify';
-import { Item } from '../../register-record/types';
-import { ResponseError } from '../../../@types/axios';
+interface IProps {
+  date: {
+    isoWeek: string;
+    isoYear: string;
+  };
+}
 
-export const TableWeek: FC = () => {
+
+export const TableWeek: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState([]);
 
   const fetch = async () => {
     try {
-      const response = await api.get('/schedule');
+      if (!date.isoWeek) {
+        return;
+      }
 
+      setLoading(true);
+      const response = await api.get('/schedule', {
+        params: {
+          isoWeek: date.isoWeek,
+          isoYear: date.isoYear,
+        }
+      });
 
-      if (response.status === 200) {
+      if (response?.data?.ok) {
         const { payload } = response.data;
-
+        console.log(payload)
         const week = Object.assign([], payload);
         setData(week);
       }
 
-    } catch (error) {
-      const err = error as ResponseError;
-      notify(err.response?.data?.message, 'error');
+    } catch (err: any) {
+      setData([]);
+      if (err.response) { 
+        tryUtils.handleError(err.response?.data?.message);
+        return;
+      }
+      console.log(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [date]);
 
   const columns = [
     {
@@ -50,20 +67,20 @@ export const TableWeek: FC = () => {
       editable: false,
     },
     {
-      title: 'Fischas disponíveis',
-      dataIndex: 'records_available',
-      width: '30%',
-      editable: true,
-      ellipsis: true,
-      sorter: (a: IRecordA, b: IRecordA) => +a.records_available - +b.records_available,
-    },
-    {
-      title: 'Fichas',
+      title: 'Total de Fichas',
       dataIndex: 'records',
-      width: '20%',
+      width: '25%',
       editable: true,
       ellipsis: true,
       sorter: (a: IRecord, b: IRecord) => +a.records - +b.records,
+    },
+    {
+      title: 'Disponíveis',
+      dataIndex: 'records_available',
+      width: '25%',
+      editable: true,
+      ellipsis: true,
+      sorter: (a: IRecordA, b: IRecordA) => +a.records_available - +b.records_available,
     },
   ];
 
@@ -83,21 +100,24 @@ export const TableWeek: FC = () => {
   });
 
   return (
-    <Form form={form}
+    <Form
+      form={form}
       component={false}
     >
       <Table
-        components={{
-          body: {
-            cell: EditableCell,
-          },
-        }}
         bordered
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={false}
       />
+      {loading && (
+        <Spinner
+          size='large'
+          center
+          style={{ paddingLeft: '6rem' }}
+        />
+      )}
     </Form>
   );
 };

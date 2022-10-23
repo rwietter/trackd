@@ -23,16 +23,18 @@ model Admin {
 
 model WeekSchedule {
   id                       String           @id @default(cuid())
-  mondayRecord             String           @default("0") @map("monday_record")
-  mondayRecordAvailable    String           @default("0") @map("monday_record_available")
-  tuesdayRecord            String           @default("0") @map("tuesday_record")
-  tuesdayRecordAvailable   String           @default("0") @map("tuesday_record_available")
-  wednesdayRecord          String           @default("0") @map("wednesday_record")
-  wednesdayRecordAvailable String           @default("0") @map("wednesday_record_available")
-  thursdayRecord           String           @default("0") @map("thursday_record")
-  thursdayRecordAvailable  String           @default("0") @map("thursday_record_available")
-  fridayRecord             String           @default("0") @map("friday_record")
-  fridayRecordAvailable    String           @default("0") @map("friday_record_available")
+  mondayRecord             String           @map("monday_record")
+  mondayRecordAvailable    String           @map("monday_record_available")
+  tuesdayRecord            String           @map("tuesday_record")
+  tuesdayRecordAvailable   String           @map("tuesday_record_available")
+  wednesdayRecord          String           @map("wednesday_record")
+  wednesdayRecordAvailable String           @map("wednesday_record_available")
+  thursdayRecord           String           @map("thursday_record")
+  thursdayRecordAvailable  String           @map("thursday_record_available")
+  fridayRecord             String           @map("friday_record")
+  fridayRecordAvailable    String           @map("friday_record_available")
+  isoWeek                  String           @map("iso_week")
+  isoYear                  String           @map("iso_year")
   createdAt                DateTime         @default(now()) @map("created_at")
   updatedAt                DateTime         @updatedAt @map("updated_at")
   DentistSchedule          DentistSchedule?
@@ -42,12 +44,9 @@ model WeekSchedule {
 
 model DentistSchedule {
   id        String       @id @default(cuid())
-  day       String
-  month     String
-  year      String
   createdAt DateTime     @default(now()) @map("created_at")
   updatedAt DateTime     @updatedAt @map("updated_at")
-  week      WeekSchedule @relation(fields: weekId, references: [id])
+  week      WeekSchedule @relation(fields: weekId, references: [id], onDelete: Cascade, onUpdate: Cascade)
   weekId    String       @unique @map("week_id")
 
   @@map("dentist_schedule")

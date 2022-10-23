@@ -1,43 +1,40 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-plusplus */
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { error, success } from '../../../helpers';
-import { normalizeSchedule } from '../../../helpers/normalize/group-data-schedule';
+import { Kaboom, normalizeSchedule } from '../../../helpers';
 import { Prisma } from '../../../config/prisma';
 
 const indexSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
-    // const { date } = req.params as { date: string };
-    const data = await Prisma.dentistSchedule.findFirst({
-      include: {
-        week: true,
+    const { isoWeek, isoYear } = req.query as { isoWeek: string, isoYear: string };
+
+    if (!isoWeek || !isoYear) {
+      throw new Error('ERR_MISSING_REQUIRED_FIELDS');
+    }
+
+    const schedule = await Prisma.weekSchedule.findFirst({
+      where: {
+        isoWeek: String(isoWeek),
+        isoYear: String(isoYear),
       },
     });
 
-    if (!data) {
-      return reply
-        .status(404)
-        .send(error(
-          { name: 'ERR_SCHEDULE_DATA_NOT_FOUND', status: 404 },
-        ));
+    if (!schedule) {
+      throw new Error('ERR_SCHEDULE_DATA_NOT_FOUND');
     }
 
-    const schedule = normalizeSchedule(data.week);
+    const normalizedSchedule = normalizeSchedule(schedule);
 
     return reply.code(200).send({
-      ...success({
-        name: 'SUCCESS_SCHEDULE_FOUND',
-        status: 200,
-        payload: {
-          ...schedule,
-        },
-      }),
+      name: 'SUCCESS_SCHEDULE_FOUND',
+      ok: true,
+      payload: {
+        ...normalizedSchedule,
+      },
     });
-  } catch (_err) {
+  } catch (err: any) {
     return reply.code(404).send({
-      ...error({
-        name: 'ERR_SCHEDULE_DATA_NOT_FOUND',
-        status: 404,
+      ...Kaboom({
+        name: err.message,
+        ok: false,
       }),
     });
   }

@@ -12,7 +12,7 @@ describe('Admin routes', () => {
   });
 
   it('Should admin signup', async () => {
-    const response = await app.inject({
+    const response: any = await app.inject({
       method: 'POST',
       url: 'http://localhost:3000/admin/signup',
       payload: {
@@ -22,11 +22,14 @@ describe('Admin routes', () => {
       },
     });
 
+    const res = response.json();
+
     expect(response.statusCode).toBe(201);
+    expect(res.ok).toBe(true);
   });
 
   it('Should admin signin', async () => {
-    const response = await app.inject({
+    const response: any = await app.inject({
       method: 'POST',
       url: 'http://localhost:3000/admin/signin',
       payload: {
@@ -34,32 +37,34 @@ describe('Admin routes', () => {
         password,
       },
     });
+    const res = response.json();
+    token = res.payload.token;
 
-    token = response.json().payload.token;
+    expect(typeof res.payload.token).toBe('string');
     expect(response.statusCode).toBe(200);
+    expect(res.ok).toBe(true);
   });
 
   it('should to create schedule', async () => {
-    const response = await app.inject({
+    const response: any = await app.inject({
       method: 'POST',
       url: 'http://localhost:3000/admin/create-schedule',
       payload: {
-        day: '08',
-        month: '09',
-        year: '2022',
+        isoWeek: String(Math.round(Math.random() * 57)),
+        isoYear: String(Math.round(Math.random() * 2025)),
         week: {
-          monday: '5',
-          tuesday: '5',
-          wednesday: '5',
-          thursday: '5',
-          friday: '4',
+          monday: String(Math.round(Math.random() * 10)),
+          tuesday: String(Math.round(Math.random() * 10)),
+          wednesday: String(Math.round(Math.random() * 10)),
+          thursday: String(Math.round(Math.random() * 10)),
+          friday: String(Math.round(Math.random() * 10)),
         },
         weekAvailable: {
-          monday: '2',
-          tuesday: '3',
-          wednesday: '4',
-          thursday: '5',
-          friday: '0',
+          monday: String(Math.round(Math.random() * 5)),
+          tuesday: String(Math.round(Math.random() * 5)),
+          wednesday: String(Math.round(Math.random() * 5)),
+          thursday: String(Math.round(Math.random() * 5)),
+          friday: String(Math.round(Math.random() * 5)),
         },
       },
       headers: {
