@@ -226,27 +226,21 @@ paths:
       tags:
         - Admin
       parameters:
-        - name: day
+        - name: isoWeek
           in: query
-          description: Day for which agenda is required
+          description: Number of the week of the year to be created is required
           required: true
           schema:
             type: string
-        - name: month
+        - name: isoYear
           in: query
-          description: Month for which agenda is required
-          required: true
-          schema:
-            type: string
-        - name: year
-          in: query
-          description: Year for which agenda is required
+          description: Year to be created is required
           required: true
           schema:
             type: string
         - name: week
           in: query
-          description: Week for which agenda is required
+          description: Week schema to be create schedule
           required: true
           schema:
             type: object
@@ -263,7 +257,7 @@ paths:
                 type: string
         - name: weekAvailable
           in: query
-          description: Week for which agenda is required
+          description: Week available schema to be create schedule
           required: true
           schema:
             type: object
@@ -280,22 +274,18 @@ paths:
                 type: string
       responses:
         200:
-          description: 'Returns agenda for a given date'
+          description: 'Returns the created week schedule'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: string
-                  day:
-                    type: string
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
                 example:
-                 success: true
-                 message: "Sucefully created schedule"
-                 statusCode: 200
-                 id: "cl88re6fm00148ipu9gt0bjqu"
-                 weekId: "cl88re6fi00068ipu8mu1qytq"
+                 ok: true
         400:
           description: 'Bad request'
           content:
@@ -303,11 +293,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
+                  name:
                     type: string
                   message:
                     type: string
                   statusCode:
                     type: number
-                  success:
-                    type: boolean
+                  stack:
+                    type: string
