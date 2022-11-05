@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt';
 import { FastifyRequest, FastifyReply } from 'fastify';
 import JWT from 'jsonwebtoken';
+import { Kaboom } from '../../../helpers';
 
 import { JwtPayload } from '.';
 import { Prisma } from '../../../config/prisma';
-import { Kaboom } from '../../../helpers';
 
 const generate = (payload: JwtPayload) => new Promise((resolve) => {
   JWT.sign(
@@ -51,13 +51,8 @@ const signIn = async (req: FastifyRequest, reply: FastifyReply) => {
         token: jwtToken,
       },
     });
-  } catch (err: any) {
-    return reply.status(400).send({
-      ...Kaboom({
-        name: err.message,
-        ok: false,
-      }),
-    });
+  } catch (error: any) {
+    return reply.code(400).send(new Kaboom(error));
   }
 };
 
