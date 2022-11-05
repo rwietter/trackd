@@ -195,12 +195,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  name:
                     type: string
-                  email:
-                    type: string
-                  token:
-                    type: string
+                  ok:
+                    type: boolean
+                  payload:
+                    type: object
+                    properties:
+                      token:
+                        type: string
         400:
           description: 'Bad request'
           content:
@@ -208,14 +211,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
+                  name:
                     type: string
                   message:
                     type: string
                   statusCode:
                     type: number
-                  success:
-                    type: boolean
+                  stack:
+                    type: string
           
   /admin/create-schedule:
     post:
