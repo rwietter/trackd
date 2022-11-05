@@ -1,23 +1,24 @@
 import { app } from '../../lib/app';
 
-/* eslint-disable no-undef */
-
 describe('GET Week Schedule route', () => {
   afterEach(async () => {
     await app.ready();
   });
 
   it('should return this json structure', async () => {
-    const response: any = await app.inject({
+    const response = await app.inject({
       method: 'GET',
       url: 'http://localhost:8396/schedule',
       query: {
-        isoWeek: '44',
-        isoYear: '2023',
+        isoWeek: '48',
+        isoYear: '2022',
       },
     });
 
-    expect(response.json().ok).toBe(true);
+    const data = response.json();
+
+    expect(data.ok).toBe(true);
+    expect(data.name).toBe('SUCCESS_SCHEDULE_FOUND');
   });
 
   afterAll(async () => {

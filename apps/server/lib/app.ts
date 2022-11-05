@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable arrow-body-style */
 import cors from '@fastify/cors';
 import middie from '@fastify/middie';
 import fastifySwagger from '@fastify/swagger';
@@ -7,12 +9,15 @@ import path from 'path';
 import { setupPlugins } from './config/setupPlugins';
 import { setupRoutes } from './config/setupRoutes';
 import { corsOptions, securityMiddleware } from './middlewares/security';
+import { makeSentry } from './config/sentry';
 
 import './config/dotenv';
 
 const app = Fastify({ logger: true });
 
 const build = async () => {
+  makeSentry(app);
+
   // Register Middleware Plugin
   await app.register(middie, { hook: 'preHandler' });
 
@@ -21,6 +26,9 @@ const build = async () => {
 
   // Register Plugins.
   setupPlugins(app);
+
+  // Sentry capture Exception
+  makeSentry(app);
 
   // Register middleware handler.
   await app.register(securityMiddleware);
@@ -42,10 +50,6 @@ const build = async () => {
   app.log.info('⚡️ App listening');
 };
 
-build().then(() => {
-  app.log.info('Build complete');
-}).catch((err) => {
-  app.log.info(err);
-});
+build();
 
 export { app };

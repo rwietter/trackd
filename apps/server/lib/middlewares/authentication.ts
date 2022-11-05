@@ -1,10 +1,10 @@
-/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 import { FastifyReply, FastifyRequest } from 'fastify';
 import JWT from 'jsonwebtoken';
+import { Kaboom } from '../helpers';
 
-const authentication = async (req: FastifyRequest, rep: FastifyReply, next: Function): Promise<void> => {
+const authentication = (req: FastifyRequest, rep: FastifyReply, next: Function) => {
   try {
     const authorizationToken = req.headers.authorization;
 
@@ -30,17 +30,19 @@ const authentication = async (req: FastifyRequest, rep: FastifyReply, next: Func
       try {
         const userId = decoded?.sub;
         if (err) {
-          throw new Error(err.message);
+          throw new Error('ERR_INVALID_TOKEN');
         }
         if (!token) {
-          throw new Error(err!.message);
+          throw new Error('ERR_INVALID_TOKEN');
         }
       } catch (error) {
         throw new Error('ERR_EXPIRED_TOKEN');
       }
     });
   } catch (error: any) {
-    return rep.code(400).send({ success: false, message: error.message });
+    return rep.code(400).send(new Kaboom(error));
+  } finally {
+    next();
   }
 };
 

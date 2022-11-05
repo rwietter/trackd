@@ -11,8 +11,4 @@ const start = async () => {
   }
 };
 
-start().then(() => {
-  app.log.info('Yup!!!! Server running');
-}).catch((err) => {
-  app.log.info(err);
-});
+start();
