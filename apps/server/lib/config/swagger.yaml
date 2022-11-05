@@ -1,19 +1,32 @@
 openapi: 3.0.0
 info:
-  description: "Test swagger specification"
+  description: "Trackd Swagger API specification"
   version: "1.0.0"
-  title: "Test swagger specification"
+  title: "Trackd API"
   contact:
-    email: "super.developer@gmail.com"
+    email: "rwietter@zohomail.com"
 servers:
   - url: "http://localhost:3000"
     description: HTTP
 paths:
-  /week-schedule:
+  /schedule:
     get:
       description: 'Get week schedule'
       tags:
         - Agenda
+      parameters:
+        - name: isoWeek
+          in: query
+          description: iso week number
+          required: true
+          schema:
+            type: string
+        - name: isoYear
+          in: query
+          description: iso year number
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 'Get week schedule'
@@ -22,72 +35,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: string,
-                  day:
-                    type: string
-                  month:
-                    type: string
-                  year:
-                    type: string
-                  createdAt:
-                    type: string
-                  updatedAt:
-                    type: string
-                  weekId:
-                    type: string
-                  week:
-                    type: object
-                    id:
-                      type: string
-                    mondayRecord:
-                      type: string
-                    mondayRecordAvailable:
-                      type: string
-                    tuesdayRecord:
-                      type: string
-                    tuesdayRecordAvailable:
-                      type: string
-                    wednesdayRecord:
-                      type: string
-                    wednesdayRecordAvailable:
-                      type: string
-                    thursdayRecord:
-                      type: string
-                    thursdayRecordAvailable:
-                      type: string
-                    fridayRecord:
-                      type: string
-                    fridayRecordAvailable:
-                      type: string
-                    createdAt:
-                      type: string
-                    updatedAt:
-                      type: string
+                  name: string
+                  ok: boolean
+                  payload:
+                    type: array
+                    items:
+                      properties:
+                        day: string
+                        key: string
+                        records: string
+                        records_available: string
                 example:
-                 id: cl8d955gs0018lqpuycnpdfzl
-                 success: true
-                 error: false
-                 day: '05'
-                 month: '10'
-                 year: '2022'
-                 createdAt: '2022-09-22T16:12:01.900Z'
-                 updatedAt: '2022-09-22T16:12:01.900Z'
-                 weekId: cl8d955gj0011lqpuxo7u52i4
-                 week:
-                  id: cl8d955gj0011lqpuxo7u52i4
-                  mondayRecord: '4'
-                  mondayRecordAvailable: '10'
-                  tuesdayRecord: '3'
-                  tuesdayRecordAvailable: '10'
-                  wednesdayRecord: '1'
-                  wednesdayRecordAvailable: '50'
-                  thursdayRecord: '6'
-                  thursdayRecordAvailable: '50'
-                  fridayRecord: '7'
-                  fridayRecordAvailable: '50'
-                  createdAt: '2022-09-22T16:12:01.891Z'
-                  updatedAt: '2022-09-22T16:12:01.891Z'
+                  name: 'SUCCESS_SCHEDULE_FOUND'
+                  ok: true
+                  payload:
+                    day: 'Segunda'
+                    key: '0'
+                    records: '5'
+                    records_available: '4'
         400:
           description: 'Bad request'
           content:
@@ -150,10 +115,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  name:
                     type: string
-                  email:
-                    type: string
+                  ok:
+                    type: boolean
         400:
           description: 'Bad request'
           content:
@@ -161,14 +126,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
+                  name:
                     type: string
                   message:
                     type: string
                   statusCode:
                     type: number
-                  success:
-                    type: boolean
+                  stack:
+                    type: string
   /admin/signin:
     post:
       description: 'Signin with admin credentials'
@@ -195,12 +160,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  name:
                     type: string
-                  email:
-                    type: string
-                  token:
-                    type: string
+                  ok:
+                    type: boolean
+                  payload:
+                    type: object
+                    properties:
+                      token:
+                        type: string
         400:
           description: 'Bad request'
           content:
@@ -208,14 +176,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
+                  name:
                     type: string
                   message:
                     type: string
                   statusCode:
                     type: number
-                  success:
-                    type: boolean
+                  stack:
+                    type: string
           
   /admin/create-schedule:
     post:
@@ -223,27 +191,21 @@ paths:
       tags:
         - Admin
       parameters:
-        - name: day
+        - name: isoWeek
           in: query
-          description: Day for which agenda is required
+          description: Number of the week of the year to be created is required
           required: true
           schema:
             type: string
-        - name: month
+        - name: isoYear
           in: query
-          description: Month for which agenda is required
-          required: true
-          schema:
-            type: string
-        - name: year
-          in: query
-          description: Year for which agenda is required
+          description: Year to be created is required
           required: true
           schema:
             type: string
         - name: week
           in: query
-          description: Week for which agenda is required
+          description: Week schema to be create schedule
           required: true
           schema:
             type: object
@@ -260,7 +222,7 @@ paths:
                 type: string
         - name: weekAvailable
           in: query
-          description: Week for which agenda is required
+          description: Week available schema to be create schedule
           required: true
           schema:
             type: object
@@ -277,22 +239,18 @@ paths:
                 type: string
       responses:
         200:
-          description: 'Returns agenda for a given date'
+          description: 'Returns the created week schedule'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: string
-                  day:
-                    type: string
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
                 example:
-                 success: true
-                 message: "Sucefully created schedule"
-                 statusCode: 200
-                 id: "cl88re6fm00148ipu9gt0bjqu"
-                 weekId: "cl88re6fi00068ipu8mu1qytq"
+                 ok: true
         400:
           description: 'Bad request'
           content:
@@ -300,11 +258,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
+                  name:
                     type: string
                   message:
                     type: string
                   statusCode:
                     type: number
-                  success:
-                    type: boolean
+                  stack:
+                    type: string
