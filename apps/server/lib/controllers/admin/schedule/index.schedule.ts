@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { Kaboom, normalizeSchedule } from '../../../helpers';
 import { Prisma } from '../../../config/prisma';
@@ -30,13 +31,8 @@ const indexSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
         ...normalizedSchedule,
       },
     });
-  } catch (err: any) {
-    return reply.code(404).send({
-      ...Kaboom({
-        name: err.message,
-        ok: false,
-      }),
-    });
+  } catch (error: any) {
+    return reply.code(400).send(new Kaboom(error));
   }
 };
 

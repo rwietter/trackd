@@ -1,10 +1,10 @@
 /* eslint-disable complexity */
 import bcrypt from 'bcrypt';
 import { FastifyRequest, FastifyReply } from 'fastify';
+import { Kaboom } from '../../../helpers';
 
 import { UserData } from '.';
 import { Prisma } from '../../../config/prisma';
-import { Kaboom } from '../../../helpers';
 
 const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
   try {
@@ -37,13 +37,8 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
       name: 'SUCCESS_USER_CREATED',
       ok: true,
     });
-  } catch (err: any) {
-    return reply.status(400).send({
-      ...Kaboom({
-        name: err.message,
-        ok: false,
-      }),
-    });
+  } catch (error: any) {
+    return reply.code(400).send(new Kaboom(error));
   }
 };
 

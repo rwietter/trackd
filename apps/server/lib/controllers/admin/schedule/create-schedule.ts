@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
+import { Kaboom } from '../../../helpers';
 import { HttpPayload } from './types';
 import { Prisma } from '../../../config/prisma';
 
@@ -60,7 +61,7 @@ const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
 
     return reply.code(201).send({ ok: true, data });
   } catch (error: any) {
-    return reply.code(404).send({ ok: false, message: error.message });
+    return reply.code(404).send(new Kaboom(error));
   }
 };
 

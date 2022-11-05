@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { FastifyInstance } from 'fastify';
 import plugin from 'fastify-plugin';
 
@@ -8,7 +9,7 @@ import plugin from 'fastify-plugin';
 
 export default plugin(async (app: FastifyInstance) => {
   try {
-    await app.register(import('@fastify/sensible'));
+    await app.register(require('@fastify/sensible'), { errorHandler: false });
   } catch (error: any) {
     app.log.error(error.message);
     process.exit(1);
