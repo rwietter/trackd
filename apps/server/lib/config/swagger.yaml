@@ -9,11 +9,24 @@ servers:
   - url: "http://localhost:3000"
     description: HTTP
 paths:
-  /week-schedule:
+  /schedule:
     get:
       description: 'Get week schedule'
       tags:
         - Agenda
+      parameters:
+        - name: isoWeek
+          in: query
+          description: iso week number
+          required: true
+          schema:
+            type: string
+        - name: isoYear
+          in: query
+          description: iso year number
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: 'Get week schedule'
@@ -22,72 +35,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: string,
-                  day:
-                    type: string
-                  month:
-                    type: string
-                  year:
-                    type: string
-                  createdAt:
-                    type: string
-                  updatedAt:
-                    type: string
-                  weekId:
-                    type: string
-                  week:
-                    type: object
-                    id:
-                      type: string
-                    mondayRecord:
-                      type: string
-                    mondayRecordAvailable:
-                      type: string
-                    tuesdayRecord:
-                      type: string
-                    tuesdayRecordAvailable:
-                      type: string
-                    wednesdayRecord:
-                      type: string
-                    wednesdayRecordAvailable:
-                      type: string
-                    thursdayRecord:
-                      type: string
-                    thursdayRecordAvailable:
-                      type: string
-                    fridayRecord:
-                      type: string
-                    fridayRecordAvailable:
-                      type: string
-                    createdAt:
-                      type: string
-                    updatedAt:
-                      type: string
+                  name: string
+                  ok: boolean
+                  payload:
+                    type: array
+                    items:
+                      properties:
+                        day: string
+                        key: string
+                        records: string
+                        records_available: string
                 example:
-                 id: cl8d955gs0018lqpuycnpdfzl
-                 success: true
-                 error: false
-                 day: '05'
-                 month: '10'
-                 year: '2022'
-                 createdAt: '2022-09-22T16:12:01.900Z'
-                 updatedAt: '2022-09-22T16:12:01.900Z'
-                 weekId: cl8d955gj0011lqpuxo7u52i4
-                 week:
-                  id: cl8d955gj0011lqpuxo7u52i4
-                  mondayRecord: '4'
-                  mondayRecordAvailable: '10'
-                  tuesdayRecord: '3'
-                  tuesdayRecordAvailable: '10'
-                  wednesdayRecord: '1'
-                  wednesdayRecordAvailable: '50'
-                  thursdayRecord: '6'
-                  thursdayRecordAvailable: '50'
-                  fridayRecord: '7'
-                  fridayRecordAvailable: '50'
-                  createdAt: '2022-09-22T16:12:01.891Z'
-                  updatedAt: '2022-09-22T16:12:01.891Z'
+                  name: 'SUCCESS_SCHEDULE_FOUND'
+                  ok: true
+                  payload:
+                    day: 'Segunda'
+                    key: '0'
+                    records: '5'
+                    records_available: '4'
         400:
           description: 'Bad request'
           content:
