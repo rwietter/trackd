@@ -1,5 +1,8 @@
 {
   "extends": "tsconfig/react-library.json",
-  "include": ["."],
+  "include": [
+    ".",
+    "../../apps/client/hooks/iso-week.tsx"
+  ],
   "exclude": ["dist", "build", "node_modules"]
 }

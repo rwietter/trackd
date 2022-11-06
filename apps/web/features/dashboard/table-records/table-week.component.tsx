@@ -16,7 +16,6 @@ interface IProps {
   };
 }
 
-
 export const TableWeek: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
