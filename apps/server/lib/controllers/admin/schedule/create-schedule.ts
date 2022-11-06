@@ -59,7 +59,7 @@ const createSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
       throw new Error('ERR_COULD_NOT_CREATE_SCHEDULE');
     }
 
-    return reply.code(201).send({ ok: true, data });
+    return reply.code(201).send({ ok: true });
   } catch (error: any) {
     return reply.code(404).send(new Kaboom(error));
   }

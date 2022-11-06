@@ -1,3 +1,5 @@
 {
-	"{*.ts, *.tsx}": ["yarn lint", "yarn format"]
+  "{*.ts, *.tsx}": [
+    "yarn lint"
+  ]
 }

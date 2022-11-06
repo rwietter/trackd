@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import { SEO } from '../components/SEO';
-import { DashboardComponent } from '../features/dashboard';
-import { Layout } from '../layouts';
+import { SEO } from '../../components/SEO';
+import { FilteringComponent } from '../../features/filtering';
+import { Layout } from '../../layouts';
 
 const Home: NextPage = () => (
   <>
@@ -11,7 +11,7 @@ const Home: NextPage = () => (
       description="consulte a disponibilidade de atentimento"
     />
     <Layout>
-      <DashboardComponent />
+      <FilteringComponent />
     </Layout>
   </>
 );

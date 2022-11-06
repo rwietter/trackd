@@ -1,10 +1,12 @@
-import Head from "next/head";
-import { FC } from "react";
+/* eslint-disable react/require-default-props */
+import { FC } from 'react';
+
+import Head from 'next/head';
 
 type SEOProps = {
-  title: string;
-  description: string;
-  image?: string;
+  title: string,
+  description: string,
+  image?: string,
 };
 
 const SEO: FC<SEOProps> = ({ title, description, image }) => {
@@ -12,7 +14,7 @@ const SEO: FC<SEOProps> = ({ title, description, image }) => {
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="icon" href={image || "/favicon.ico"} />
+      <link rel="icon" href={image || '/favicon.ico'} />
     </Head>
   );
 };
