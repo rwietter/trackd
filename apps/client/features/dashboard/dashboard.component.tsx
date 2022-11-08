@@ -23,13 +23,15 @@ type Schedule = {
   [key in keyof Properties]: any;
 };
 
+const DDMMYYYY = "DD-MM-YYYY";
+
 const DashboardComponent = () => {
   const [data, setData] = useState<Properties[]>([]);
 
   const handleRequest = async () => {
     try {
       const dateObject = new Date();
-      const isoWeek = `${moment(dateObject).isoWeek() + 1}`;
+      const isoWeek = `${moment(dateObject).isoWeek()}`;
       const isoYear = dateObject.getFullYear().toString();
 
       const response = await api.get("/schedule", {
@@ -48,16 +50,13 @@ const DashboardComponent = () => {
 
       const newWeek = week.map((item: Schedule) => {
         const dayName = enUs[item.day as keyof typeof enUs];
-        const date = moment()
-          .add(1, "weeks")
-          .isoWeekday(dayName)
-          .format("DD-MM-YYYY");
+        const date = moment().isoWeekday(dayName).format(DDMMYYYY);
+        const currentDate = moment().format(DDMMYYYY);
+        const isWeekBeforeCurrentDate = moment(date).isSameOrAfter(currentDate);
 
         return {
           key: item.day,
-          isOld:
-            new Date().toLocaleDateString() >
-            new Date(date).toLocaleDateString(),
+          isOld: isWeekBeforeCurrentDate,
           day: date,
           records: item.records,
           records_available: item.records_available,
@@ -79,32 +78,28 @@ const DashboardComponent = () => {
       {data.length >= 1 &&
         data.map((day) => {
           return (
-            <div key={day.key}>
-              {!day.isOld && (
-                <S.Card>
-                  <S.CardHeader>
-                    <S.CardTitle
-                      color={day.day ? (mapColors[day.key] as any) : "segunda"}
-                    >
-                      {day.key.toUpperCase()}
-                    </S.CardTitle>
-                    <S.CardDate>{day.day}</S.CardDate>
-                  </S.CardHeader>
-                  <S.Records>
-                    <S.Record>
-                      <S.RecordIndicator>{day.records}</S.RecordIndicator>
-                      <S.RecordTitle>Totais</S.RecordTitle>
-                    </S.Record>
-                    <S.Record>
-                      <S.RecordIndicator>
-                        {day.records_available}
-                      </S.RecordIndicator>
-                      <S.RecordTitle>Disponíveis</S.RecordTitle>
-                    </S.Record>
-                  </S.Records>
-                </S.Card>
-              )}
-            </div>
+            <S.Card key={day.day} data-is-date-after={day.isOld}>
+              <S.CardHeader>
+                <S.CardTitle
+                  color={day.day ? (mapColors[day.key] as any) : "segunda"}
+                >
+                  {day.key.toUpperCase()}
+                </S.CardTitle>
+                <S.CardDate>{day.day}</S.CardDate>
+              </S.CardHeader>
+              <S.Records>
+                <S.Record>
+                  <S.RecordIndicator>{day.records}</S.RecordIndicator>
+                  <S.RecordTitle>Totais</S.RecordTitle>
+                </S.Record>
+                <S.Record>
+                  <S.RecordIndicator>
+                    {day.records_available}
+                  </S.RecordIndicator>
+                  <S.RecordTitle>Disponíveis</S.RecordTitle>
+                </S.Record>
+              </S.Records>
+            </S.Card>
           );
         })}
     </S.Dashboard>

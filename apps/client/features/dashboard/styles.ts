@@ -26,26 +26,31 @@ export const Card = styled('div', {
   height: 'auto',
 
   marginTop: '1.5rem',
+
+  '&[data-is-date-after="false"]': {
+    display: 'none',
+  },
 });
 
 export const CardHeader = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
 });
 
 export const CardTitle = styled('h3', {
-  fontSize: '1.25rem',
+  fontSize: '1.6rem',
   fontFamily: '$sans',
-  fontWeight: 800,
+  fontWeight: 900,
   color: '#000',
   position: 'relative',
   '&::before': {
     content: '""',
     width: '5px',
-    height: '27px',
+    height: '35px',
     borderRadius: '5px',
     background: 'red',
-    top: '-2px',
+    top: '-5px',
     left: '-16px',
     position: 'absolute',
   },
@@ -88,9 +93,9 @@ export const CardTitle = styled('h3', {
 
 export const CardDate = styled('p', {
   all: 'unset',
-  fontSize: '0.875rem',
+  fontSize: '1rem',
   fontFamily: '$sans',
-  fontWeight: 400,
+  fontWeight: 500,
   color: '#9BB6CD !important',
 });
 
