@@ -1,8 +1,16 @@
 import type { FC, ReactNode } from 'react';
 
-import { Footer } from '../components/footer';
-import { Header } from '../components/header';
+import dynamic from 'next/dynamic';
+
 import * as S from './styles';
+
+const Footer = dynamic(() => import('../components/footer/footer.component'), {
+  loading: () => <p>...</p>,
+});
+
+const Header = dynamic(() => import('../components/header/header.component'), {
+  loading: () => <p>...</p>,
+});
 
 type LayoutProps = {
   children: ReactNode,
@@ -18,4 +26,4 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export { Layout };
+export default Layout;

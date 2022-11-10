@@ -1,13 +1,12 @@
-import { LogoIcon } from 'ui';
-
+import { Logo } from '../../assets';
 import * as S from './styles';
 
 const Header = () => {
   return (
     <S.Header>
-      <LogoIcon />
+      <Logo />
     </S.Header>
   );
 };
 
-export { Header };
+export default Header;

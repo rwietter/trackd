@@ -13,7 +13,4 @@ export const globalStyles = globalCss({
   body: {
     scrollBehavior: 'smooth',
   },
-  'h1, h2, h3': {
-    lineHeight: '1.1',
-  },
 });

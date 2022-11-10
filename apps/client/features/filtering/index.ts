@@ -1,1 +1,1 @@
-export { FilteringComponent } from './filtering.component';
+export * as FilteringComponent from './filtering.component';

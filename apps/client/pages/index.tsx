@@ -1,8 +1,18 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
 import { SEO } from '../components/SEO';
-import { DashboardComponent } from '../features/dashboard';
-import { Layout } from '../layouts';
+
+const Layout = dynamic(() => import('../layouts/layout.component'), {
+  loading: () => <p>...</p>,
+});
+
+const DashboardComponent = dynamic(
+  () => import('../features/dashboard/dashboard.component'),
+  {
+    loading: () => <p>...</p>,
+  }
+);
 
 const Home: NextPage = () => (
   <>

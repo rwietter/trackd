@@ -44,7 +44,9 @@ module.exports = {
     // ------- favorite rules -------
     "react/jsx-indent": ["error", 2],
     "react/jsx-max-props-per-line": [1, { maximum: 2 }],
+    "sonarjs/no-duplicate-string": "off",
     "react/jsx-indent-props": ["error", 2],
+    "react/no-unused-prop-types": "off",
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     'newline-per-chained-call': ["error", { ignoreChainWithDepth: 3 }],
     'no-console': 'off',
