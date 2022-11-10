@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import { useEffect } from 'react';
+import 'antd/dist/antd.css';
 
 import type { AppProps } from 'next/app';
 

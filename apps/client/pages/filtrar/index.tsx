@@ -1,8 +1,18 @@
 import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
 import { SEO } from '../../components/SEO';
-import { FilteringComponent } from '../../features/filtering';
-import { Layout } from '../../layouts';
+
+const Layout = dynamic(() => import('../../layouts/layout.component'), {
+  loading: () => <p>...</p>,
+});
+
+const FilteringComponent = dynamic<any>(
+  () => import('../../features/filtering/filtering.component'),
+  {
+    loading: () => <p>...</p>,
+  }
+);
 
 const Home: NextPage = () => (
   <>

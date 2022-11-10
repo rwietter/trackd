@@ -1,8 +1,48 @@
 {
-  "extends": "tsconfig/react-library.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/features/*": [
+        "features/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/helpers/*": [
+        "helpers/*"
+      ],
+      "@/services/*": [
+        "services/*"
+      ]
+    }
+  },
   "include": [
-    ".",
-    "../../apps/client/hooks/iso-week.tsx"
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ],
-  "exclude": ["dist", "build", "node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
