@@ -1,11 +1,12 @@
+import { Logo } from '../../assets';
 import * as S from './styles';
 
 const Header = () => {
   return (
     <S.Header>
-      <h1>Trackd</h1>
+      <Logo />
     </S.Header>
   );
 };
 
-export { Header };
+export default Header;
