@@ -2,6 +2,7 @@
 import { Spinner } from 'ui';
 
 import { Properties } from '../../@types';
+import { useTheme, ThemeStore } from '../../store';
 import { mapColors } from './mapping';
 import * as S from './styles';
 import { Props } from './types'
@@ -14,6 +15,8 @@ const NoContent = () => (
 )
 
 const CardComponent = ({ data }: Props) => {
+  const { theme } = useTheme() as ThemeStore
+
   if (!data) return <NoContent />
 
   if (data.length < 1) return <Spinner size="large" />
@@ -26,7 +29,11 @@ const CardComponent = ({ data }: Props) => {
         }
 
         return (
-          <S.Card key={day} borders={border ? mapColors[key] as any : 'disabled'}>
+          <S.Card
+            key={day}
+            borders={border ? mapColors[key] as any : 'disabled'}
+            data-theme={theme}
+          >
             <S.CardHeader>
               <S.CardTitle
                 color={day ? (mapColors[key] as any) : "Segunda"}

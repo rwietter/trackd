@@ -1,9 +1,24 @@
-import { styled } from '@stitches/react';
+import { st } from 'ui';
 
-export const Header = styled('header', {
+export const Header = st('header', {
   display: 'flex',
-  background: '#fff',
+  background: '$mediumBackground',
   height: '60px',
   alignItems: 'center',
-  justifyContent: 'center',
+  padding: '0 1rem',
+  justifyContent: 'space-between',
+
+  '@bp5': {
+    padding: '0 10rem',
+  },
+});
+
+export const DarkMode = st('button', {
+  background: 'none',
+  color: '$text',
+  outline: 'none',
+  width: '1.8rem',
+  height: '1.8rem',
+  border: 'none',
+  cursor: 'pointer',
 });

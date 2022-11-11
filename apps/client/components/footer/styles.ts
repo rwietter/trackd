@@ -1,12 +1,13 @@
-import { styled } from '@stitches/react';
+import { st } from 'ui';
 
-export const Footer = styled('footer', {
+export const Footer = st('footer', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   position: 'fixed',
   bottom: 0,
-  background: '#fff',
+  background: '$mediumBackground',
+  backdropFilter: 'blur(10px)',
   width: '100%',
   height: '60px',
 
@@ -16,5 +17,20 @@ export const Footer = styled('footer', {
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '100%',
+  },
+
+  variants: {
+    theme: {
+      dark: {
+        svg: {
+          stroke: '$text',
+        },
+      },
+      light: {
+        svg: {
+          stroke: '$text',
+        },
+      },
+    },
   },
 });

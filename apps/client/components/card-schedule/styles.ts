@@ -1,19 +1,24 @@
-import { styled } from '../../styles/styles';
+import { st } from 'ui';
 
-export const CardContainer = styled('div', {});
+export const CardContainer = st('div', {
+  background: '$card',
+});
 
-export const Card = styled('section', {
+export const Card = st('section', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  background: '#fff',
+  background: '$card',
   padding: '1rem',
   paddingBottom: '2rem',
   borderRadius: '0.5rem',
   height: 'auto',
 
   marginTop: '1.5rem',
-  boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+
+  '&[data-theme="light"]': {
+    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+  },
 
   '&:nth-of-type(1)': {
     border: '2px solid #1DA584',
@@ -55,13 +60,13 @@ export const Card = styled('section', {
   },
 });
 
-export const CardHeader = styled('div', {
+export const CardHeader = st('div', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
 });
 
-export const CardTitle = styled('h3', {
+export const CardTitle = st('h3', {
   all: 'unset',
   fontSize: '1.5rem',
   fontFamily: '$sans',
@@ -121,27 +126,27 @@ export const CardTitle = styled('h3', {
   },
 });
 
-export const CardDate = styled('p', {
+export const CardDate = st('p', {
   all: 'unset',
   fontSize: '1rem',
   fontFamily: '$sans',
-  color: '#363F5F',
+  color: '$text',
   fontWeight: 500,
 });
 
-export const Records = styled('div', {
+export const Records = st('div', {
   display: 'flex',
   justifyContent: 'space-between',
-  background: '#FFF',
+  background: '$card',
   width: '100%',
   paddingTop: '2rem',
 });
 
-export const Record = styled('div', {
+export const Record = st('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  background: '#F5F5F6',
+  background: '$cardHover',
   padding: '1.7rem 1rem',
   width: '100%',
   borderRadius: '0.5rem',
@@ -155,23 +160,23 @@ export const Record = styled('div', {
   },
 });
 
-export const RecordIndicator = styled('h3', {
+export const RecordIndicator = st('h3', {
   all: 'unset',
   fontSize: '1.7rem',
   fontFamily: '$sans',
-  color: '#363F5F',
+  color: '$text',
   fontWeight: 900,
 });
 
-export const RecordTitle = styled('h4', {
+export const RecordTitle = st('h4', {
   all: 'unset',
   fontSize: '1.3em',
   paddingTop: '0.5rem',
-  color: '#363F5F',
+  color: '$text',
   fontWeight: 500,
 });
 
-export const NoContent = styled('div', {
+export const NoContent = st('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

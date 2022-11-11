@@ -1,13 +1,13 @@
-import { styled } from '@stitches/react';
+import { st } from 'ui';
 
-export const Layout = styled('div', {
-  background: '#F3FAF8',
+export const Layout = st('div', {
+  background: '$background',
   position: 'relative',
   minHeight: '100vh',
   height: 'auto',
 });
 
-export const Container = styled('main', {
+export const Container = st('main', {
   paddingTop: '20px',
   paddingBottom: '7rem',
 });
