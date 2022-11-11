@@ -5,6 +5,7 @@ import { Form, Table } from 'antd';
 
 import { Spinner } from '@/components/spinner'
 import { tryUtils } from '@/helpers/utils';
+import { useFetchSechedule } from '@/hooks/use-fetch-schedule';
 import { api } from '@/services/api';
 
 import { Item, IRecord, IRecordA } from '../types';
@@ -18,41 +19,7 @@ interface IProps {
 
 export const TableWeek: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState([]);
-
-  const fetch = async () => {
-    try {
-      if (!date.isoWeek) {
-        return;
-      }
-
-      setLoading(true);
-      const response = await api.get('/schedule', {
-        params: {
-          isoWeek: date.isoWeek,
-          isoYear: date.isoYear,
-        }
-      });
-
-      if (response?.data?.ok) {
-        const { payload } = response.data;
-        console.log(payload)
-        const week = Object.assign([], payload);
-        setData(week);
-      }
-
-    } catch (err: any) {
-      setData([]);
-      if (err.response) { 
-        tryUtils.handleError(err.response?.data?.message);
-        return;
-      }
-      console.log(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { data, fetch, loading } = useFetchSechedule(date);
 
   useEffect(() => {
     fetch();

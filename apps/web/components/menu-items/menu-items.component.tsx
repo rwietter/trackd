@@ -31,7 +31,7 @@ const MenuItem = () => {
           <EditIcon width="25"
             height="25"
           />
-          <Link href="/cadastrar">Excluir</Link>
+          <Link href="/excluir">Excluir</Link>
         </Item>
       </Items>
     </MenuITemsLayout>
