@@ -1,4 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { GetServerSideProps } from 'next';
+
+import { parseCookies } from 'nookies';
 
 import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
@@ -6,12 +8,7 @@ import { TableWeek } from '@/features/dashboard';
 import {  HeaderDashboard, Title } from '@/features/dashboard/styles';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
 
-
-type IProps = {
-  children: ReactNode;
-}
-
-const Dashboard: FC<IProps> = () => {
+const Dashboard = () => {
   const [date, onChangeDate, disableDate] = useIsoWeek();
 
   return (
@@ -29,3 +26,22 @@ const Dashboard: FC<IProps> = () => {
 }
 
 export default Dashboard;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = parseCookies(ctx)['auth::token'];
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {
+      authenticated: true
+    },
+  }
+}
