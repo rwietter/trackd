@@ -9,7 +9,7 @@ import {  HeaderDashboard, Title } from '@/features/dashboard/styles';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
 
 const Dashboard = () => {
-  const [date, onChangeDate, disableDate] = useIsoWeek();
+  const [date, onChangeDate, disableDate] = useIsoWeek({ flag: 'delete' });
 
   return (
     <Layout>

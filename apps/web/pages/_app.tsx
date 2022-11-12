@@ -7,24 +7,26 @@ import { Toaster } from 'react-hot-toast';
 
 import type { AppProps } from 'next/app';
 
-import { darkTheme, globalStyles, lightTheme } from '../features/ui/theme';
+import { darkTheme, lightTheme } from 'ui';
+
+import { globalStyles } from '../features/ui/theme';
+import { ThemeStore, useTheme } from '../store';
 
 function App({ Component, pageProps }: AppProps): ReactNode {
-  const theme = 'light';
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const { theme } = useTheme() as ThemeStore;
 
   useEffect(() => {
-    globalStyles();
-    const classTheme = document.querySelector('#theme');
-    if (!classTheme) return;
-    classTheme.className = themeMode;
-  }, [themeMode]);
+    const body = document.querySelector('body');
+    if (body) {
+      globalStyles();
+      const currentTheme = theme === 'light' ? lightTheme : darkTheme;
+      body.className = currentTheme;
+    }
+  }, [theme]);
 
   return (
     <div>
-      <Component {...pageProps}
-        id="theme"
-      />
+      <Component {...pageProps} />
       <Toaster />
     </div>
   );

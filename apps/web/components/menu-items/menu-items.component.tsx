@@ -13,7 +13,6 @@ const MenuItem = () => {
 
   return (
     <MenuITemsLayout>
-      <Logo />
       <Items>
         <Item className={isActive('/dashboard')}>
           <HomeIcon width="25"
@@ -27,11 +26,11 @@ const MenuItem = () => {
           />
           <Link href="/cadastrar">Cadastrar</Link>
         </Item>
-        <Item className={isActive('/excluir')}>
+        <Item className={isActive('/editar')}>
           <EditIcon width="25"
             height="25"
           />
-          <Link href="/excluir">Excluir</Link>
+          <Link href="/editar">Editar</Link>
         </Item>
       </Items>
     </MenuITemsLayout>

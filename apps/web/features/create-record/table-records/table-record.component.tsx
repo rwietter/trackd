@@ -5,6 +5,7 @@ import { Form, Table } from 'antd';
 
 import { Spinner } from '@/components/spinner';
 import { Button } from '@/features/ui/button';
+import { notify } from '@/helpers/notify';
 import { tryUtils } from '@/helpers/utils';
 import { api } from '@/services/api';
 
@@ -116,10 +117,12 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
         }
       })
 
-      tryUtils.isResponseOk(response, 'Horários cadastrados com sucesso', 'success')
+      if (response?.data?.ok) {
+        notify('Agenda criada com sucesso', 'success');
+      }
     } catch (err: any) {
       if (err.response) {
-        tryUtils.handleError(err.response?.data?.message);
+        notify(err.response?.data?.message, 'error');
         return;
       }
       console.log(err.message)

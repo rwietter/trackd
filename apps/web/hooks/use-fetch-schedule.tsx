@@ -10,7 +10,7 @@ type Props = {
 
 const useFetchSechedule = (date: Props) => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ schedule: [], id: '' });
 
   const fetch = () => {
     try {
@@ -26,16 +26,16 @@ const useFetchSechedule = (date: Props) => {
         }
       }).then((response) => {
         if (response?.data?.ok) {
-          const { payload } = response.data;
+          const { payload, id } = response.data;
           const week = Object.assign([], payload);
-          setData(week);
+          setData({ schedule: week, id });
         }
       }).catch((error) => {
-        setData([]);
+        setData({ schedule: [], id: '' });
         tryUtils.handleError(error.response?.data?.message);
       });
     } catch (err: any) {
-      setData([]);
+      setData({ schedule: [], id: '' });
       if (err.response) {
         tryUtils.handleError(err.response?.data?.message);
         return;
@@ -45,7 +45,7 @@ const useFetchSechedule = (date: Props) => {
       setLoading(false);
     }
   }
-  return { fetch, data, loading };
+  return { fetch, data, setData, loading };
 }
 
 export { useFetchSechedule };

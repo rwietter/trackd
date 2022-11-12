@@ -5,7 +5,6 @@ import { parseCookies } from 'nookies';
 import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
 import { HeaderDashboard, Title } from '@/features/dashboard/styles';
-import { TableDeleteRecord } from '@/features/delete-record';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
 
 const Delete = () => {
@@ -19,7 +18,6 @@ const Delete = () => {
           disableDate={disableDate as (curr: unknown) => boolean[]}
         />
       </HeaderDashboard>
-      <TableDeleteRecord date={date} />
     </Layout>
   )
 }

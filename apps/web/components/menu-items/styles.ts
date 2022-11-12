@@ -8,7 +8,7 @@ export const MenuITemsLayout = styled('div', {
   width: '100%',
   maxWidth: '15rem',
   borderRadius: '8px',
-  padding: '2rem 0.5rem',
+  padding: '0 0.5rem 2rem .5rem',
 });
 
 export const Items = styled('nav', {
@@ -17,7 +17,7 @@ export const Items = styled('nav', {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'flex-start',
-  paddingTop: '3rem',
+  paddingTop: '1rem',
   a: {
     all: 'unset',
     display: 'block',
