@@ -1,6 +1,6 @@
-import { styled } from "@/features/ui/theme";
+import { st } from "ui";
 
-export const Button = styled('button', {
+export const Button = st('button', {
   borderRadius: '3px',
   border: 'none',
   cursor: 'pointer',
@@ -12,40 +12,37 @@ export const Button = styled('button', {
   variants: {
     size: {
       sm: {
-        fontSize: '14px',
+        fontSize: '16px',
         width: '100px',
         height: '35px',
       },
       md: {
-        fontSize: '14px',
+        fontSize: '18px',
         width: '150px',
         height: '40px',
       },
       lg: {
-        fontSize: '20px',
+        fontSize: '21px',
         width: '200px',
         height: '50px',
       },
     },
     bg: {
       primary: {
-        background: '#000000',
-        color: '#ffffff',
+        background: '$inverse',
+        color: '$fg',
         '&:hover': {
-          background: '#ffffff',
-          color: '#000000',
-          border: '1px solid #000000',
+          background: '$primary',
+          color: '$fg',
         },
       },
       secondary: {
-        background: '#ffffff',
+        background: '$inverse',
         backgroundClip: 'padding-box',
-        color: '#000000',
-        border: '1px solid #000000',
+        color: '$fg',
         '&:hover': {
-          background: '#000000',
-          color: '#ffffff',
-          border: '1px solid #0088E2',
+          background: '$tertiary',
+          color: '$fg',
         },
       },
     }

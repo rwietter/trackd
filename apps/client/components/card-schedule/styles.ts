@@ -184,7 +184,7 @@ export const NoContent = st('div', {
   height: '15rem',
 
   textAlign: 'center',
-  maxWidth: '40rem',
+  maxWidth: '35rem',
   margin: '0 auto',
 
   '@media (min-width: 768px)': {

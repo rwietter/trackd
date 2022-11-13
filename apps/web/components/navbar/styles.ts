@@ -1,28 +1,29 @@
-import { styled } from '@/features/ui/theme';
+import { st } from 'ui';
 
-export const Container = styled('div', {
+export const Container = st('div', {
   position: 'relative',
 });
 
-export const NavBarLayout = styled('header', {
+export const NavBarLayout = st('header', {
   width: '100%',
   maxWidth: '20rem',
   padding: '2rem 0.5rem 2rem 2rem',
+  borderRight: '1px solid $borderColor',
   zIndex: 1,
-  marginTop: '1rem',
   display: 'flex',
   justifyContent: 'space-between',
   flexDirection: 'column',
-  backgroundColor: '#FFF',
-  minHeight: 'calc(100vh - 4.7rem)',
-  transition: 'all 0.3s ease-in-out',
+  backgroundColor: '$bg',
+  minHeight: 'calc(100vh - 3.8rem)',
+  transition: '$transitonTheme, all 350ms ease 0s',
+  transform: 'translateX(-100%)',
 
-  '&[data-menu="true"]': {
-    transform: 'translateX(-100%)',
+  '&[data-menu="open"]': {
+    transform: 'translateX(0)',
   },
 });
 
-export const Button = styled('button', {
+export const Button = st('button', {
   background: 'none',
   border: 'none',
   cursor: 'pointer',

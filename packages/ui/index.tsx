@@ -5,4 +5,6 @@ export * from './components/spinner';
 export {
   css, darkTheme, lightTheme, getCssText, globalCss, styled as st, keyframes, reset,
 } from './theme';
-export { DarkIcon, LightIcon } from './components/icons';
+export { DarkIcon, LightIcon, DotsIcon } from './components/icons';
+export * from './assets/logo.svg';
+export * from './hooks';

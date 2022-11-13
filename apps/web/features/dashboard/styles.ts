@@ -1,19 +1,20 @@
-import { styled } from '@/features/ui/theme';
+import { st } from 'ui';
 
-export const HeaderDashboard = styled('header', {
+export const HeaderDashboard = st('header', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  marginTop: '1rem',
 });
 
-export const Title = styled('h1', {
+export const Title = st('h1', {
   fontSize: '2rem',
-  fontFamily: 'Raleway',
+  fontFamily: '$sans, Raleway, sans-serif',
   fontWeight: 700,
-  color: '#303778',
+  color: '$text',
 });
 
-export const ButtonWrapper = styled('div', {
+export const ButtonWrapper = st('div', {
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',

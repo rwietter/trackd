@@ -1,5 +1,3 @@
-import { FC, ReactNode } from 'react';
-
 import { GetServerSideProps } from 'next';
 
 import { Divider } from 'antd';

@@ -9,17 +9,17 @@ import { Props } from './types'
 
 const NoContent = () => (
   <S.NoContent>
-    <h2>Não foram encontrados registros para a data selecionada.</h2>
-    <p>Tente buscar por outra data.</p>
+    <h2>Não foram encontrados registros para esta data!</h2>
+    <p>Selecione outra data ou tente mais tarde.</p>
   </S.NoContent>
 )
 
-const CardComponent = ({ data }: Props) => {
+const CardComponent = ({ data, loading = false }: Props) => {
   const { theme } = useTheme() as ThemeStore
 
-  if (!data) return <NoContent />
+  if (loading) return <Spinner size="large" />
 
-  if (data.length < 1) return <Spinner size="large" />
+  if (!data || data.length < 1) return <NoContent />
 
   return (
     <>

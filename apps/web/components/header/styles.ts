@@ -7,9 +7,9 @@ export const Header = st("header", {
   padding: ".6rem 2rem",
   position: "relative",
   zIndex: 1,
-  background: '$background',
-  transition: '$transitonTheme',
-  boxShadow: '0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1)',
+  background: '$bg',
+  borderBottom: '1px solid $borderColor',
+  transition: '$transitonTheme, border 350ms ease 0s',
 });
 
 export const RightContainer = st("div", {

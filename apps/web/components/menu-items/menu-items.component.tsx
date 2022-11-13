@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { EditIcon, HomeIcon, PlusPlusIcon } from 'public/assets';
-import { Logo } from 'public/assets/logo';
 
 import { Item, Items, MenuITemsLayout } from './styles';
 

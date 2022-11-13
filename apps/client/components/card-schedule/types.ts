@@ -7,4 +7,5 @@ type Schedule = {
 
 export type Props = {
   data: Schedule[] | null;
+  loading?: boolean;
 }

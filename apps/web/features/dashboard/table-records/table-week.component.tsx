@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useState, useEffect } from 'react';
 
-import { Form, Table } from 'antd';
+import { Form } from 'antd';
 
 import { Spinner } from '@/components/spinner'
+import { CustomTable } from '@/components/table';
 import { Button } from '@/features/ui/button';
 import { notify } from '@/helpers/notify';
 import { tryUtils } from '@/helpers/utils';
@@ -105,10 +106,10 @@ export const TableWeek: FC<IProps> = ({ date }) => {
       form={form}
       component={false}
     >
-      <Table
+      <CustomTable
         bordered
         dataSource={data.schedule}
-        columns={mergedColumns}
+        columns={mergedColumns as any}
         rowClassName="editable-row"
         pagination={false}
       />
@@ -118,6 +119,7 @@ export const TableWeek: FC<IProps> = ({ date }) => {
           type='submit'
           onClick={handleFormDelete}
           size='md'
+          color='secondary'
         >
           {loading ? <Spinner size='small' center={false} /> : 'Excluir'}
         </Button>

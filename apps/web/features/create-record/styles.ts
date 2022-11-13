@@ -1,16 +1,17 @@
-import { styled } from '@/features/ui/theme';
+import { st } from 'ui';
 
-export const Header = styled('header', {
+export const Header = st('header', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   paddingBottom: '1rem',
-  fontFamily: 'Raleway',
+  marginTop: '1rem',
 });
 
-export const Title = styled('h1', {
+export const Title = st('h1', {
   all: 'unset',
   fontSize: '2rem',
+  fontFamily: '$sans, Raleway, sans-serif',
   fontWeight: 700,
-  color: '#303778',
+  color: '$text',
 });

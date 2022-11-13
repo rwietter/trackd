@@ -1,9 +1,9 @@
 import { FC, Key, useState } from 'react';
 
-import { Form, Table } from 'antd';
-
+import { Form } from 'antd';
 
 import { Spinner } from '@/components/spinner';
+import { CustomTable } from '@/components/table';
 import { Button } from '@/features/ui/button';
 import { notify } from '@/helpers/notify';
 import { tryUtils } from '@/helpers/utils';
@@ -12,7 +12,7 @@ import { api } from '@/services/api';
 import { Columns } from './columns';
 import { EditableCell } from './edit-cell.component';
 import { normalize } from './normalize-records';
-import { ButtonWrapper } from './styles';
+import * as S from './styles';
 import { Item, IWeek } from './types';
 
 const weekDay: IWeek = {
@@ -140,19 +140,20 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
       component={false}
       onSubmitCapture={() => save(editingKey)}
     >
-      <Table
+      <CustomTable
         components={{
           body: {
             cell: EditableCell,
           },
         }}
+        dropdownPrefixCls="ant-dropdown"
         bordered
         dataSource={data}
-        columns={mergedColumns}
+        columns={mergedColumns as any}
         rowClassName="editable-row"
         pagination={false}
       />
-      <ButtonWrapper>
+      <S.ButtonWrapper>
         <Button
           type='submit'
           onClick={handleSubmitForm}
@@ -169,7 +170,7 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
           Resetar
         </Button>
 
-      </ButtonWrapper>
+      </S.ButtonWrapper>
     </Form>
   );
 };

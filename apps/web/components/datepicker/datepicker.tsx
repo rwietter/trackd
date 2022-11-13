@@ -1,11 +1,11 @@
 /* eslint-disable react/require-default-props */
 import { FC } from 'react';
 
-import { DatePicker as DatePickerAntd } from 'antd';
-
 import { IMomentInputDate } from '@types';
 
 import { MomentInput } from 'moment'
+
+import { CustomDatePicker } from './styles';
 
 interface IProps {
   onChangeDate: (date: IMomentInputDate) => void;
@@ -21,7 +21,7 @@ const handleDisable = (curr: moment.Moment, { disableDate }: Pick<IProps, 'disab
 
 const DatePicker: FC<IProps> = ({ onChangeDate, disableDate }) => {
   return (
-    <DatePickerAntd
+    <CustomDatePicker
       onChange={onChangeDate as (date: unknown) => void}
       format="DD/MM/YYYY"
       size='large'

@@ -1,16 +1,18 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
+type Menu = 'open' | 'closed';
+
 export interface MenuStore {
-  menu: boolean;
-  setMenu?: (theme: boolean) => void;
+  menu: Menu;
+  setMenu?: (theme: Menu) => void;
 }
 
 const useMenu = create(
   persist(
     (set) => ({
-      menu: false,
-      setMenu: (menu: MenuStore) => set({ menu }),
+      menu: undefined,
+      setMenu: (menu: Menu) => set({ menu }),
     }),
     {
       name: 'menu',

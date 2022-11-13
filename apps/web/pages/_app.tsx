@@ -6,6 +6,7 @@ import { ReactNode, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
 import { darkTheme, lightTheme } from 'ui';
 
@@ -26,6 +27,18 @@ function App({ Component, pageProps }: AppProps): ReactNode {
 
   return (
     <div>
+      <Head>
+        <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          />
+          <link rel="preconnect" href="https://rsms.me/" />
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        </Head>
+      </Head>
       <Component {...pageProps} />
       <Toaster />
     </div>

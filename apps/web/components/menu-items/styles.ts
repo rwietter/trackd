@@ -1,6 +1,6 @@
-import { styled } from '@/features/ui/theme';
+import { st } from 'ui';
 
-export const MenuITemsLayout = styled('div', {
+export const MenuITemsLayout = st('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -11,30 +11,32 @@ export const MenuITemsLayout = styled('div', {
   padding: '0 0.5rem 2rem .5rem',
 });
 
-export const Items = styled('nav', {
+export const Items = st('nav', {
   all: 'unset',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'flex-start',
   paddingTop: '1rem',
+  width: '100%',
   a: {
     all: 'unset',
     display: 'block',
-    fontSize: '1.3rem',
+    fontSize: '1.2rem',
     cursor: 'pointer',
-    fontWeight: 400,
-    transition: 'color 0.2s ease',
-    color: '#7D8085',
-    fontFamily: 'Prompt',
+    fontWeight: 600,
+    transition: '$transitonTheme',
+    color: '$text',
+    fontFamily: 'Raleway, sans-serif',
+    fontVariantLigatures: 'common-ligatures',
 
     '&:hover': {
-      color: '#303778',
+      color: '$text',
     },
   },
 });
 
-export const Item = styled('div', {
+export const Item = st('div', {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'flex-start',
@@ -42,7 +44,7 @@ export const Item = styled('div', {
   padding: '0.8rem 1.4rem',
   borderRadius: '8px',
   width: '100%',
-  transition: 'background 0.2s ease',
+  transition: '$transitonTheme, border 350ms ease 0s',
   '& svg': {
     marginRight: '0.7rem',
   },
@@ -50,12 +52,13 @@ export const Item = styled('div', {
     marginTop: '1rem',
   },
   '&:hover': {
-    backgroundColor: '#F5F8FE',
+    backgroundColor: '$fg',
   },
   '&.active': {
-    backgroundColor: '#F5F8FE',
+    backgroundColor: '$fg',
+    border: '1px solid $borderColor',
   },
   '&.active a': {
-    color: '#303778',
+    color: '$zen1',
   },
 });

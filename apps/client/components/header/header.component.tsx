@@ -1,24 +1,26 @@
 /* eslint-disable prettier/prettier */
-import { DarkIcon, LightIcon } from 'ui';
+import { DarkIcon, LightIcon, useMount } from 'ui';
 
-import { Logo } from '../../assets';
 import { useTheme, type ThemeStore } from '../../store';
 import * as S from './styles';
 
-const handleTheme = (props: ThemeStore) => {
-  if (props.setTheme) {
-    props.setTheme(props.theme === 'light' ? 'dark' : 'light');
-  }
-};
-
 const Header = () => {
   const { theme, setTheme } = useTheme() as ThemeStore;
+  const { isMounted } = useMount();
+
+  if (!isMounted) return null;
+
+  const handleTheme = () => {
+    if (setTheme) {
+      setTheme(theme === 'light' ? 'dark' : 'light');
+    }
+  };
 
   return (
     <S.Header>
-      <Logo />
-      <S.DarkMode type="button" onClick={() => handleTheme({ theme, setTheme })}>
-        {theme === 'dark' ? <LightIcon /> : <DarkIcon />}
+      <S.Trackd>Trackd</S.Trackd>
+      <S.DarkMode type="button" onClick={handleTheme}>
+        {theme === 'light' ? <DarkIcon /> : <LightIcon />}
       </S.DarkMode>
     </S.Header>
   );

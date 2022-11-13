@@ -1,6 +1,6 @@
-import { styled } from '@/features/ui/theme';
+import { st } from 'ui';
 
-export const ButtonWrapper = styled('div', {
+export const ButtonWrapper = st('div', {
   display: 'flex',
   justifyContent: 'flex-end',
   alignItems: 'center',
