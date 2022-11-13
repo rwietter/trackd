@@ -5,8 +5,11 @@ import { IMomentInputDate } from '@types';
 
 import moment, { MomentInput } from 'moment';
 
+type Props = {
+  flag: 'delete' | 'create';
+}
 
-const useIsoWeek = () => {
+const useIsoWeek = (props: Props = { flag: 'create' }) => {
   const [date, setDate] = useState({ isoWeek: '', isoYear: '' });
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const useIsoWeek = () => {
     return [
       moment(current).day() === 0,
       moment(current).day() === 6,
-      current && current < moment().endOf('day')
+      props.flag === 'create' && moment(current).isBefore(moment(), 'day'),
     ]
   }
 

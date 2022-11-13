@@ -7,21 +7,21 @@ import { Properties } from '../../@types';
 import { useFetch } from "../../hooks/useFetch";
 import * as S from "./styles";
 
-const DynamicCard = dynamic<{ data: Properties[] }>(() => import('../../components/card-schedule/card.component'), {
+const DynamicCard = dynamic<{ data: Properties[], loading: boolean }>(() => import('../../components/card-schedule/card.component'), {
   loading: () => <p>...</p>,
 })
 
 const DashboardComponent = () => {
-  const { schedule, handleFetch } = useFetch();
+  const { schedule, handleFetch, loading } = useFetch();
 
   useEffect(() => {
     handleFetch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line
   }, []);
 
   return (
     <S.Dashboard>
-      <DynamicCard data={schedule} />
+      <DynamicCard data={schedule} loading={loading} />
     </S.Dashboard>
   );
 };

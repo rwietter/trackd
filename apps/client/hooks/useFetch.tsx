@@ -11,14 +11,16 @@ type Input = {
 }
 
 const useFetch = () => {
+  const [loading, setLoading] = useState(false);
   const [schedule, setSchedule] = useState<Properties[]>([]);
 
   const handleFetch = async (value: Input = { _d: null }) => {
     try {
+      setLoading(true);
       const { default: moment } = await import('moment')
-      const dateObject = value._d ? new Date(value._d) : new Date();
-      const isoWeek = moment(dateObject).isoWeek().toString();
-      const isoYear = dateObject.getFullYear().toString();
+      const now = value._d ? new Date(value._d) : new Date();
+      const isoWeek = moment(now).isoWeek().toString();
+      const isoYear = now.getFullYear().toString();
 
       const response = await api.get('/schedule', {
         params: {
@@ -30,30 +32,33 @@ const useFetch = () => {
       const { payload } = response.data;
       const week = Object.assign([], payload);
 
-      const newWeek = week.map((item: Schedule) => {
-        const dayName = enUs[item.day as keyof typeof enUs];
-        const date = moment(value._d || dateObject).isoWeekday(dayName).format('DD-MM-YYYY');
+      const nowDate = moment().format('DD-MM-YYYY');
 
-        const currentDate = moment().format('DD-MM-YYYY');
-        const isWeekBeforeCurrentDate = moment(date).isSameOrAfter(currentDate);
+      const mappedSchedule = week.map((item: Schedule) => {
+        const dayOfWeek = enUs[item.day as keyof typeof enUs];
+        const weekDay = moment(value._d || now).isoWeekday(dayOfWeek).format('DD-MM-YYYY');
+
+        const isWeekBeforeCurrentDate = moment(weekDay).isSameOrAfter(nowDate);
 
         return {
           key: item.day,
           isOld: value._d ? true : isWeekBeforeCurrentDate,
           border: !value._d,
-          day: date,
+          day: weekDay,
           records: item.records,
           records_available: item.records_available,
         };
       });
 
-      setSchedule(newWeek);
+      setSchedule(mappedSchedule);
     } catch (error) {
       setSchedule([]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { schedule, handleFetch };
+  return { schedule, handleFetch, loading };
 };
 
 export { useFetch };

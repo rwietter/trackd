@@ -2,9 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600&family=Prompt:wght@100;200;300;400;500;600&display=swap');
 
 * {
-  font-family: 'Lato', 'sans-serif';
+  font-family: 'Inter', 'sans-serif';
   font-family: 'Prompt', 'sans-serif';
   font-family: 'Raleway', 'sans-serif';
+  font-variant-ligatures: common-ligatures;
 }
 
 html,
@@ -32,4 +33,67 @@ a {
     color: white;
     background: black;
   }
+}
+
+.ant-picker {
+  background: var(--colors-fg) !important;
+  border: 1px solid var(--colors-text) !important;
+  border-radius: 10rem !important;
+  color: var(--colors-text) !important;
+  transition: var(--transitions-transitonTheme), border 350ms ease !important;
+}
+
+.ant-picker-input>input {
+  color: var(--colors-text) !important;
+  transition: var(--transitions-transitonTheme) !important;
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  font-family: 'Inter var', 'Raleway';
+  font-feature-settings: 'ss01' on, 'ss02' on, 'ss03' on, 'ss04' on, 'ss05' on;
+  font-variant-ligatures: common-ligatures;
+  font-weight: 600;
+}
+
+.ant-picker-panel-container .ant-picker-panel {
+  background: var(--colors-fg) !important;
+  border: 1px solid var(--colors-text) !important;
+}
+
+.ant-picker-header,
+.ant-picker-header button,
+.ant-picker-cell {
+  color: var(--colors-text) !important;
+}
+
+.ant-picker-week-panel-row:hover td {
+  background: var(--colors-calendar-color-selected) !important;
+}
+
+.ant-picker-header {
+  border: none !important;
+}
+
+.ant-picker-cell-disabled {
+  color: var(--colors-calendar-color-disabled) !important;
+  background: var(--colors-calendar-color-background);
+}
+
+.ant-picker-cell-week {
+  color: var(--colors-calendar-color-disabled) !important;
+}
+
+.ant-picker-content th {
+  color: var(--colors-text) !important;
+}
+
+.ant-picker-clear {
+  color: var(--colors-text) !important;
+  background: transparent !important;
+}
+
+.ant-picker-input:hover .ant-picker-clear {
+  color: var(--colors-text) !important;
+}
+
+.ant-picker-cell-disabled.ant-picker-cell-today .ant-picker-cell-inner::before {
+  border: 2px solid var(--colors-text) !important;
 }

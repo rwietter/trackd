@@ -27,6 +27,7 @@ const indexSchedule = async (req: FastifyRequest, reply: FastifyReply) => {
     return reply.code(200).send({
       name: 'SUCCESS_SCHEDULE_FOUND',
       ok: true,
+      id: schedule.id,
       payload: {
         ...normalizedSchedule,
       },

@@ -1,9 +1,13 @@
-const LightIcon = () => (
+import { forwardRef, SVGProps } from 'react';
+
+const LightIcon = forwardRef((props: SVGProps<SVGSVGElement>, ref: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
     fill="#fff"
+    ref={ref}
+    {...props}
   >
-    <g id="LightIcon">
+    <g>
       <g>
         <path d="M12,18.09A6.09,6.09,0,1,1,18.09,12,6.1,6.1,0,0,1,12,18.09ZM12,6.91A5.09,5.09,0,1,0,17.09,12,5.1,5.1,0,0,0,12,6.91Z" />
         <path d="M11.5,2.568v1.6a.5.5,0,1,0,1,0v-1.6a.5.5,0,1,0-1,0Z" />
@@ -17,6 +21,6 @@ const LightIcon = () => (
       </g>
     </g>
   </svg>
-);
+));
 
 export { LightIcon };

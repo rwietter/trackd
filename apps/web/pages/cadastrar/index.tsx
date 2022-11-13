@@ -1,6 +1,8 @@
-import { FC, ReactNode } from 'react';
+import { GetServerSideProps } from 'next';
 
 import { Divider } from 'antd';
+
+import { parseCookies } from 'nookies';
 
 import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
@@ -8,11 +10,7 @@ import { TableRegisterRecord } from '@/features/create-record';
 import { Header, Title } from '@/features/create-record/styles';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
 
-type IProps = {
-  children: ReactNode;
-}
-
-const RegisterRecord: FC<IProps> = () => {
+const RegisterRecord = () => {
   const [date, onChangeDate, disableDates] = useIsoWeek();
 
   return (
@@ -31,3 +29,23 @@ const RegisterRecord: FC<IProps> = () => {
 }
 
 export default RegisterRecord;
+
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = parseCookies(ctx)['auth::token'];
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {
+      authenticated: true
+    },
+  }
+}
