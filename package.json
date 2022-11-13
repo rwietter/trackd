@@ -31,10 +31,6 @@
 	"engines": {
 		"node": ">=14.0.0"
 	},
-	"dependencies": {
-		"@stitches/react": "^1.2.8",
-		"antd": "^4.23.5"
-	},
 	"packageManager": "yarn@1.22.19",
 	"config": {
 		"commitizen": {
@@ -47,5 +43,8 @@
 			"commit-msg": "npx --no -- commitlint --edit",
 			"prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
 		}
+	},
+	"dependencies": {
+		"next-transpile-modules": "^10.0.0"
 	}
 }

@@ -48,11 +48,6 @@ const Columns = ({ isEditing, cancel, save, editingKey, edit }: ColumnProps) => 
             >
               Salvar
             </Typography.Link>
-            <Popconfirm title="Quer realmente cancelar ?"
-              onConfirm={cancel}
-            >
-              <a href='#null'>Cancelar</a>
-            </Popconfirm>
           </span>
         ) : (
           <Typography.Link

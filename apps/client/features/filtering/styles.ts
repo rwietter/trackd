@@ -1,8 +1,8 @@
 import { DatePicker } from 'antd';
 
-import { styled } from '../../styles/styles';
+import { st } from 'ui';
 
-export const ScheduleContainer = styled('div', {
+export const ScheduleContainer = st('div', {
   padding: '0 1rem',
   display: 'flex',
   flexDirection: 'column',
@@ -16,16 +16,17 @@ export const ScheduleContainer = styled('div', {
   },
 });
 
-export const DateContainer = styled('div', {
-  backgroundColor: '#FFFFFF',
+export const DateContainer = st('div', {
+  background: '$card',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   padding: '0.5rem 0',
   height: '12rem',
+  color: '$text',
   '.ant-picker': {
-    border: '1px solid #E5E5E5',
+    border: '1px solid $text',
     width: 'clamp(13rem, 50%, 20rem)',
     height: '2.5rem',
     marginTop: '1rem',
@@ -39,4 +40,4 @@ export const DateContainer = styled('div', {
   },
 });
 
-export const Calendar = styled(DatePicker, {});
+export const Calendar = st(DatePicker, {});

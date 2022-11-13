@@ -2,21 +2,24 @@
 import { Spinner } from 'ui';
 
 import { Properties } from '../../@types';
+import { useTheme, ThemeStore } from '../../store';
 import { mapColors } from './mapping';
 import * as S from './styles';
 import { Props } from './types'
 
 const NoContent = () => (
   <S.NoContent>
-    <h2>Não foram encontrados registros para a data selecionada.</h2>
-    <p>Tente buscar por outra data.</p>
+    <h2>Não foram encontrados registros para esta data!</h2>
+    <p>Selecione outra data ou tente mais tarde.</p>
   </S.NoContent>
 )
 
-const CardComponent = ({ data }: Props) => {
-  if (!data) return <NoContent />
+const CardComponent = ({ data, loading = false }: Props) => {
+  const { theme } = useTheme() as ThemeStore
 
-  if (data.length < 1) return <Spinner size="large" />
+  if (loading) return <Spinner size="large" />
+
+  if (!data || data.length < 1) return <NoContent />
 
   return (
     <>
@@ -26,7 +29,11 @@ const CardComponent = ({ data }: Props) => {
         }
 
         return (
-          <S.Card key={day} borders={border ? mapColors[key] as any : 'disabled'}>
+          <S.Card
+            key={day}
+            borders={border ? mapColors[key] as any : 'disabled'}
+            data-theme={theme}
+          >
             <S.CardHeader>
               <S.CardTitle
                 color={day ? (mapColors[key] as any) : "Segunda"}

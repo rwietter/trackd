@@ -40,7 +40,10 @@ export function SignIn() {
       });
 
       if (response.data.ok) {
-        setCookie(null, 'auth::token', response.data.payload?.token);
+        setCookie(null, 'auth::token', response.data.payload?.token, {
+          maxAge: 60 * 60 * 24 * 30,
+          expires: new Date(Date.now() + 60 * 60 * 24 * 30),
+        });
         router.push('/dashboard');
       }
 

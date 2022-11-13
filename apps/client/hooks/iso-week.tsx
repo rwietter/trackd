@@ -17,10 +17,9 @@ const useIsoWeek = () => {
   }, []);
 
   useEffect(() => {
-    const dateObject = new Date();
-    const isoWeek = `${moment(dateObject).isoWeek() + 1}`;
-    const isoYear = dateObject.getFullYear().toString();
-    console.log(isoWeek, isoYear);
+    const now = new Date();
+    const isoWeek = `${moment(now).isoWeek() + 1}`;
+    const isoYear = now.getFullYear().toString();
 
     setDate({ isoWeek, isoYear });
   }, []);

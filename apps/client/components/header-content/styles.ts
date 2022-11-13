@@ -1,6 +1,6 @@
-import { styled } from '../../styles/styles';
+import { st } from 'ui';
 
-export const HeaderContent = styled('div', {
+export const HeaderContent = st('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -8,7 +8,7 @@ export const HeaderContent = styled('div', {
   padding: '0 1rem',
 });
 
-export const Title = styled('h1', {
+export const Title = st('h1', {
   all: 'unset',
   fontSize: '2.4rem',
   fontWeight: 900,
@@ -19,7 +19,7 @@ export const Title = styled('h1', {
   lineHeight: '1.4',
 });
 
-export const Description = styled('p', {
+export const Description = st('p', {
   all: 'unset',
   fontSize: '1.1rem',
   fontWeight: 400,

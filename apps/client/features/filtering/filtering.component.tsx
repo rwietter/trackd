@@ -17,8 +17,6 @@ const FilteringComponent = () => {
   const { disableDate } = useIsoWeek();
   const { schedule, handleFetch } = useFetch();
 
-  console.log('schedule', schedule)
-
   return (
     <>
       <S.DateContainer>
