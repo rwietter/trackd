@@ -25,7 +25,7 @@ export const DarkMode = st('button', {
 
 export const Trackd = st('h2', {
   all: 'unset',
-  fontSize: '1.5rem',
+  fontSize: '2.4em',
   fontFamily: '$sans',
   fontWeight: 900,
   textGradient: 'linear-gradient(90deg, #FF5F6D 0%, #FFC371 100%)',

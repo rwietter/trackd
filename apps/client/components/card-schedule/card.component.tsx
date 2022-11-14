@@ -19,6 +19,8 @@ const CardComponent = ({ data, loading = false }: Props) => {
 
   if (loading) return <Spinner size="large" />
 
+  if (!data?.every((item: Properties) => item.isOld)) return <NoContent />
+
   if (!data || data.length < 1) return <NoContent />
 
   return (

@@ -27,34 +27,22 @@ export const Card = st('section', {
   variants: {
     borders: {
       segunda: {
-        '&:nth-of-type(1)': {
-          border: '2px solid #1DA584',
-        },
+        border: '2px solid #1DA584',
       },
       terca: {
-        '&:nth-of-type(1)': {
-          border: '2px solid #9A36BB',
-        },
+        border: '2px solid #9A36BB',
       },
       quarta: {
-        '&:nth-of-type(1)': {
-          border: '2px solid #FFA07A',
-        },
+        border: '2px solid #FFA07A',
       },
       quinta: {
-        '&:nth-of-type(1)': {
-          border: '2px solid #FF69B4',
-        },
+        border: '2px solid #FF69B4',
       },
       sexta: {
-        '&:nth-of-type(1)': {
-          border: '2px solid #FFC0CB',
-        },
+        border: '2px solid #FFC0CB',
       },
       disabled: {
-        '&:nth-of-type(1)': {
-          border: 'none',
-        },
+        border: 'none',
       },
     },
   },
@@ -80,7 +68,7 @@ export const CardTitle = st('h3', {
     borderRadius: '5px',
     background: 'red',
     top: '-2.5px',
-    left: '-16px',
+    left: '-17px',
     position: 'absolute',
   },
 

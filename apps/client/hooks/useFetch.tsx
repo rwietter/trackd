@@ -42,8 +42,8 @@ const useFetch = () => {
 
         return {
           key: item.day,
-          isOld: value._d ? true : isWeekBeforeCurrentDate,
-          border: !value._d,
+          isOld: !isWeekBeforeCurrentDate,
+          border: value._d,
           day: weekDay,
           records: item.records,
           records_available: item.records_available,
