@@ -32,19 +32,19 @@ const useFetch = () => {
       const { payload } = response.data;
       const week = Object.assign([], payload);
 
-      const nowDate = moment().format('DD-MM-YYYY');
+      const nowDate = moment().format('YYYY-MM-DD');
 
       const mappedSchedule = week.map((item: Schedule) => {
         const dayOfWeek = enUs[item.day as keyof typeof enUs];
-        const weekDay = moment(value._d || now).isoWeekday(dayOfWeek).format('DD-MM-YYYY');
+        const weekDay = moment(value._d || now).isoWeekday(dayOfWeek).format('YYYY-MM-DD');
 
-        const isWeekBeforeCurrentDate = moment(weekDay).isSameOrAfter(nowDate);
+        const isNowDateAfterDate = moment(nowDate).isAfter(weekDay);
 
         return {
           key: item.day,
-          isOld: !isWeekBeforeCurrentDate,
-          border: value._d,
-          day: weekDay,
+          isOld: value._d ? false : isNowDateAfterDate,
+          border: value._d ? false : !isNowDateAfterDate,
+          day: moment(weekDay).format('DD-MM-YYYY'),
           records: item.records,
           records_available: item.records_available,
         };

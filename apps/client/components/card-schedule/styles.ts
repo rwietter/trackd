@@ -20,29 +20,32 @@ export const Card = st('section', {
     boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
   },
 
-  '&:nth-of-type(1)': {
-    border: '2px solid #1DA584',
-  },
-
   variants: {
     borders: {
       segunda: {
-        border: '2px solid #1DA584',
+        '&:nth-of-type(1)': {
+          border: '2px solid #1DA584',
+        },
       },
       terca: {
-        border: '2px solid #9A36BB',
+        '&:nth-of-type(1)': {
+          border: '2px solid #9A36BB',
+        },
       },
       quarta: {
-        border: '2px solid #FFA07A',
+        '&:nth-of-type(1)': {
+          border: '2px solid #FFA07A',
+        },
       },
       quinta: {
-        border: '2px solid #FF69B4',
+        '&:nth-of-type(1)': {
+          border: '2px solid #FF69B4',
+        },
       },
       sexta: {
-        border: '2px solid #FFC0CB',
-      },
-      disabled: {
-        border: 'none',
+        '&:nth-of-type(1)': {
+          border: '2px solid #FFC0CB',
+        },
       },
     },
   },
