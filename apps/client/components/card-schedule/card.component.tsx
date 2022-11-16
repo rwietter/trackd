@@ -14,14 +14,14 @@ const NoContent = () => (
   </S.NoContent>
 )
 
-const CardComponent = ({ data, loading = false }: Props) => {
+const CardComponent = ({ data, loading }: Props) => {
   const { theme } = useTheme() as ThemeStore
 
   if (loading) return <Spinner size="large" />
 
-  if (data?.every((item: Properties) => item.isOld)) return <NoContent />
-
   if (!data) return <NoContent />
+
+  // if (data?.every((item: Properties) => item.isOld)) return <NoContent />
 
   return (
     <>
