@@ -11,12 +11,11 @@ type Input = {
 }
 
 const useFetch = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState<Properties[]>([]);
 
   const handleFetch = async (value: Input = { _d: null }) => {
     try {
-      setLoading(true);
       const { default: moment } = await import('moment')
       const now = value._d ? new Date(value._d) : new Date();
       const isoWeek = moment(now).isoWeek().toString();
