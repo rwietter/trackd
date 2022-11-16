@@ -19,14 +19,14 @@ const CardComponent = ({ data, loading = false }: Props) => {
 
   if (loading) return <Spinner size="large" />
 
-  if (!data?.every((item: Properties) => item.isOld)) return <NoContent />
+  if (data?.every((item: Properties) => item.isOld)) return <NoContent />
 
-  if (!data || data.length < 1) return <NoContent />
+  if (!data) return <NoContent />
 
   return (
     <>
       {data.map(({ key, day, isOld, records, records_available, border }: Properties) => {
-        if (!isOld) {
+        if (isOld) {
           return null
         }
 

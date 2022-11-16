@@ -11,6 +11,6 @@ export const Dashboard = st('div', {
     gridTemplateColumns: 'repeat(2, 1fr)',
     maxWidth: '70rem',
     margin: '0 auto',
-    gap: '1rem',
+    gap: '1rem 2rem',
   },
 });
