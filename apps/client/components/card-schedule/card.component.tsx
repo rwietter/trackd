@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable prettier/prettier */
 import { Spinner } from 'ui';
 
@@ -19,9 +20,7 @@ const CardComponent = ({ data, loading }: Props) => {
 
   if (loading) return <Spinner size="large" />
 
-  if (!data) return <NoContent />
-
-  // if (data?.every((item: Properties) => item.isOld)) return <NoContent />
+  if (!data || data.length < 1) return <NoContent />
 
   return (
     <>
