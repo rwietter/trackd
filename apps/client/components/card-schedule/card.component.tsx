@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable prettier/prettier */
 import { Spinner } from 'ui';
 
