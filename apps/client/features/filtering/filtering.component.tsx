@@ -1,10 +1,6 @@
 /* eslint-disable prettier/prettier */
-
-import { useState } from 'react';
-
 import dynamic from 'next/dynamic';
 
-import type { MomentInput } from 'moment'
 import { useIsoWeek, DatePicker } from 'ui';
 
 import { Properties } from '../../@types';
