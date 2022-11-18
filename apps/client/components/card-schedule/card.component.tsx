@@ -22,8 +22,6 @@ const CardComponent = ({ data, loading }: Props) => {
 
   if (!data) return <NoContent />
 
-  // if (data?.every((item: Properties) => item.isOld)) return <NoContent />
-
   return (
     <>
       {data.map(({ key, day, isOld, records, records_available, border }: Properties) => {
