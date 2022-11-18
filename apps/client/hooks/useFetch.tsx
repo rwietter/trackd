@@ -11,10 +11,11 @@ type Input = {
 }
 
 const useFetch = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [schedule, setSchedule] = useState<Properties[]>([]);
 
   const handleFetch = async (value: Input = { _d: null }) => {
+    setLoading(true)
     try {
       const { default: moment } = await import('moment')
       const now = value._d ? new Date(value._d) : new Date();
@@ -50,6 +51,7 @@ const useFetch = () => {
       });
 
       setSchedule(mappedSchedule);
+
     } catch (error) {
       setSchedule([]);
     } finally {

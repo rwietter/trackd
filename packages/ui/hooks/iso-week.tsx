@@ -32,7 +32,14 @@ const useIsoWeek = () => {
     current && current < moment().endOf('day'),
   ];
 
-  return { date, onChangeDate, disableDate };
+  const disableEndWeek = (current: MomentInput) => [
+    moment(current).day() === 0,
+    moment(current).day() === 6,
+  ];
+
+  return {
+    date, onChangeDate, disableDate, disableEndWeek,
+  };
 };
 
 export { useIsoWeek };
