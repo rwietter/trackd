@@ -15,7 +15,7 @@
 		"dev": "turbo run dev --parallel",
 		"lint": "eslint --ext .tsx,.ts apps/",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"docs": "docsify serve ./apps/docs -p 3333",
+    "docs": "docsify serve ./docs -p 3333",
 		"commit": "cz"
 	},
 	"devDependencies": {
