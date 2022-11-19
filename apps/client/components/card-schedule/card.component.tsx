@@ -24,8 +24,6 @@ const Card = memo(function Card({ data, loading }: Props) {
 
   if (!data || data.every((day) => day.isOld)) return <NoContent />
 
-  // if (data?.every((item: Properties) => item.isOld)) return <NoContent />
-
   return (
     <>
       {data.map(({ key, day, isOld, records, records_available, border }: Properties) => {
