@@ -13,8 +13,6 @@ export const Title = st('h1', {
   fontSize: '2.4rem',
   fontWeight: 900,
   letterSpacing: '-0.03em',
-  fontFeatureSettings: '"pnum" on, "lnum" on, "kern" on, "ss01" on, "ss02" on',
-  fontVariantLigatures: 'common-ligatures',
   fontFamily: '$sans',
   lineHeight: '1.4',
 });
@@ -26,6 +24,4 @@ export const Description = st('p', {
   textAlign: 'center',
   letterSpacing: '-0.05em',
   fontFamily: '$sans',
-  fontFeatureSettings: '"pnum" on, "lnum" on, "kern" on, "ss01" on, "ss02" on',
-  fontVariantLigatures: 'common-ligatures',
 });
