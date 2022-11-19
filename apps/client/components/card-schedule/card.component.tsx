@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable prettier/prettier */
+import { memo } from 'react';
+
 import { Spinner } from 'ui';
 
 import { Properties } from '../../@types';
@@ -15,12 +17,14 @@ const NoContent = () => (
   </S.NoContent>
 )
 
-const CardComponent = ({ data, loading }: Props) => {
+const Card = memo(function Card({ data, loading }: Props) {
   const { theme } = useTheme() as ThemeStore
 
   if (loading) return <Spinner size="large" />
 
-  if (!data || data.length < 1) return <NoContent />
+  if (!data || data.every((day) => day.isOld)) return <NoContent />
+
+  // if (data?.every((item: Properties) => item.isOld)) return <NoContent />
 
   return (
     <>
@@ -61,7 +65,6 @@ const CardComponent = ({ data, loading }: Props) => {
       })}
     </>
   )
-}
+})
 
-
-export default CardComponent;
+export default Card;

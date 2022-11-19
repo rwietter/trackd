@@ -11,7 +11,7 @@ type Input = {
 }
 
 const useFetch = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [schedule, setSchedule] = useState<Properties[]>([]);
 
   const handleFetch = async (value: Input = { _d: null }) => {
