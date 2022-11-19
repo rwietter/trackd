@@ -43,6 +43,7 @@ module.exports = {
   rules: {
     // ------- favorite rules -------
     "react/jsx-indent": ["error", 2],
+    "react/display-name": 'off',
     "react/jsx-max-props-per-line": [1, { maximum: 2 }],
     "sonarjs/no-duplicate-string": "off",
     "react/jsx-indent-props": ["error", 2],

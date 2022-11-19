@@ -187,9 +187,6 @@ export const NoContent = st('div', {
     fontSize: '1.4rem',
     fontWeight: 700,
     fontFamily: '$sans',
-    fontFeatureSettings:
-      '"pnum" on, "lnum" on, "kern" on, "ss01" on, "ss02" on',
-    fontVariantLigatures: 'common-ligatures',
     color: '#5D7B95',
     letterSpacing: '-0.03em',
 
