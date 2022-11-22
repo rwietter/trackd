@@ -2,13 +2,13 @@ import { Typography } from "antd";
 
 import { IRecord, IRecordA, Item } from "./types";
 
-interface ColumnProps { 
+interface ColumnProps {
   isEditing: (record: Item) => boolean;
   save: (key: React.Key) => void;
   cancel: () => void;
   editingKey: string;
   edit: (record: Partial<Item> & { key: React.Key }) => void;
- }
+}
 
 const Columns = ({ isEditing, save, editingKey, edit }: ColumnProps) => {
   return [

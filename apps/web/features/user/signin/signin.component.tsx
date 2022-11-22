@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { setCookie } from 'nookies';
 
-import { tryUtils } from '@/helpers/utils';
+import { utils } from '@/helpers/utils';
 import { zodOptions } from '@/helpers/zod/zod-options';
 import { api } from '@/services/api';
 
@@ -49,7 +49,7 @@ export function SignIn() {
 
     } catch (err: any) {
       if (err.response) {
-        tryUtils.handleError(err.response?.data?.message);
+        utils.handleError(err.response?.data?.message);
         return;
       }
       console.log(err.message);

@@ -1,4 +1,4 @@
-import { FC, Key, useState } from 'react';
+import { FC, Key, useEffect, useState } from 'react';
 
 import { Form } from 'antd';
 
@@ -7,31 +7,14 @@ import { CustomTable } from '@/components/table';
 import { Button } from '@/features/ui/button';
 import { notify } from '@/helpers/notify';
 import { utils } from '@/helpers/utils';
+import { useFetchSechedule } from '@/hooks/use-fetch-schedule';
 import { api } from '@/services/api';
 
 import { Columns } from './columns';
 import { EditableCell } from './edit-cell.component';
 import { normalize } from './normalize-records';
 import * as S from './styles';
-import { Item, IWeek } from './types';
-
-const weekDay: IWeek = {
-  0: 'Segunda',
-  1: 'Terça',
-  2: 'Quarta',
-  3: 'Quinta',
-  4: 'Sexta',
-};
-
-const originData: Item[] = [];
-for (let idx = 0; idx < 5; idx++) {
-  originData.push({
-    key: idx.toString(),
-    day: weekDay[idx],
-    records: `5`,
-    records_available: `0`,
-  });
-}
+import { Item } from './types';
 
 interface IProps {
   date: {
@@ -40,16 +23,19 @@ interface IProps {
   };
 }
 
-export const TableRegisterRecord: FC<IProps> = ({ date }) => {
+export const EditSchedule: FC<IProps> = ({ date }) => {
   const [form] = Form.useForm();
-  const [data, setData] = useState<Item[]>(originData);
   const [loading, setLoading] = useState<boolean>(false);
   const [editingKey, setEditingKey] = useState('');
+  const { data, setData, fetch } = useFetchSechedule(date);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(fetch, [date]);
 
   const isEditing = (record: Item) => record.key === editingKey;
 
   const edit = (record: Partial<Item> & { key: Key }) => {
-    form.setFieldsValue({ ...record});
+    form.setFieldsValue({ ...record });
     setEditingKey(record.key);
   };
 
@@ -61,7 +47,7 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
     try {
       const row = (await form.validateFields()) as Item;
 
-      const newData = [...data];
+      const newData = [...data.schedule];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
         const item = newData[index];
@@ -69,11 +55,11 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
           ...item,
           ...row,
         });
-        setData(newData);
+        setData({ schedule: newData, id: data.id });
         setEditingKey('');
       } else {
         newData.push(row);
-        setData(newData);
+        setData({ schedule: newData, id: data.id });
         setEditingKey('');
       }
     } catch (errInfo) {
@@ -97,28 +83,31 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
     };
   });
 
-  const handleSubmitForm = async () => {
+  const handleEditSchedule = async () => {
     try {
       setLoading(true);
-      const { week, weekAvailable } = normalize(data);
+      const { week, weekAvailable } = normalize(data.schedule);
 
       const token = utils.getToken();
+
 
       const payload = {
         week,
         weekAvailable,
         isoWeek: date.isoWeek,
         isoYear: date.isoYear,
+        id: data.id
       }
 
-      const response = await api.post('/admin/create-schedule', payload, {
+
+      const response = await api.put('/admin/edit-schedule', payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
 
       if (response?.data?.ok) {
-        notify('Agenda criada com sucesso', 'success');
+        notify('Agenda editada com sucesso', 'success');
       }
     } catch (err: any) {
       if (err.response) {
@@ -131,8 +120,8 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
     }
   }
 
-  const handleResetForm = () => { 
-    setData(originData);
+  const handleResetForm = () => {
+    setData({ schedule: [], id: data.id });
   }
 
   return (
@@ -148,7 +137,7 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
         }}
         dropdownPrefixCls="ant-dropdown"
         bordered
-        dataSource={data}
+        dataSource={data.schedule}
         columns={mergedColumns as any}
         rowClassName="editable-row"
         pagination={false}
@@ -156,10 +145,10 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
       <S.ButtonWrapper>
         <Button
           type='submit'
-          onClick={handleSubmitForm}
+          onClick={handleEditSchedule}
           size='md'
         >
-          {loading ? <Spinner size='small' center={false} /> : 'Salvar'}
+          {loading ? <Spinner size='small' center={false} /> : 'Editar'}
         </Button>
         <Button
           type='reset'

@@ -7,7 +7,7 @@ import { Spinner } from '@/components/spinner'
 import { CustomTable } from '@/components/table';
 import { Button } from '@/features/ui/button';
 import { notify } from '@/helpers/notify';
-import { tryUtils } from '@/helpers/utils';
+import { utils } from '@/helpers/utils';
 import { useFetchSechedule } from '@/hooks/use-fetch-schedule';
 import { api } from '@/services/api';
 
@@ -73,7 +73,7 @@ export const TableWeek: FC<IProps> = ({ date }) => {
   const handleFormDelete = async () => {
     try {
       setDeleteLoading(true);
-      const token = tryUtils.getToken();
+      const token = utils.getToken();
 
       const response = await api.delete('/admin/delete-schedule', {
         headers: {
