@@ -14,6 +14,7 @@ const errorName: IMapErrorName = {
   ERR_USER_NOT_FOUND: 'Usuário não encontrado',
   ERR_SCHEDULE_DATA_NOT_FOUND: 'Não há agenda para a semana selecionada',
   ERR_FAILED_TO_DELETE_SCHEDULE: 'Ocorreu um erro ao deletar a agenda',
+  ERR_FAILED_TO_EDIT_SCHEDULE: 'Ocorreu um erro ao editar a agenda',
 } as const;
 
 const mapError = (name: string): string => errorName[name] || 'Aconteceu um erro! Tente novamente mais tarde';

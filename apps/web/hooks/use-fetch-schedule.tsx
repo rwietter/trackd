@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { tryUtils } from '@/helpers/utils';
+import { utils } from '@/helpers/utils';
 import { api } from '@/services/api';
 
 type Props = {
@@ -8,9 +8,19 @@ type Props = {
   isoYear: string;
 }
 
+export interface Schedule {
+  schedule: {
+    key: string;
+    day: string;
+    records: string;
+    records_available: string;
+  }[],
+  id: string
+}
+
 const useFetchSechedule = (date: Props) => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({ schedule: [], id: '' });
+  const [data, setData] = useState<Schedule>({} as Schedule);
 
   const fetch = () => {
     try {
@@ -32,12 +42,12 @@ const useFetchSechedule = (date: Props) => {
         }
       }).catch((error) => {
         setData({ schedule: [], id: '' });
-        tryUtils.handleError(error.response?.data?.message);
+        utils.handleError(error.response?.data?.message);
       });
     } catch (err: any) {
       setData({ schedule: [], id: '' });
       if (err.response) {
-        tryUtils.handleError(err.response?.data?.message);
+        utils.handleError(err.response?.data?.message);
         return;
       }
       console.log(err.message);
