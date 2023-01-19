@@ -136,7 +136,8 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
   }
 
   return (
-    <Form form={form}
+    <Form
+      form={form}
       component={false}
       onSubmitCapture={() => save(editingKey)}
     >
@@ -159,7 +160,10 @@ export const TableRegisterRecord: FC<IProps> = ({ date }) => {
           onClick={handleSubmitForm}
           size='md'
         >
-          {loading ? <Spinner size='small' center={false} /> : 'Salvar'}
+          {loading ? <Spinner
+            size='small'
+            center={false}
+                     /> : 'Salvar'}
         </Button>
         <Button
           type='reset'

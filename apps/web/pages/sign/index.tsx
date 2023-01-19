@@ -1,28 +1,14 @@
 /* eslint-disable react/no-unused-prop-types */
-import { useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
-
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import { parseCookies } from 'nookies';
 
-import { Main } from '../features/user/styles';
+import { Header } from '@/components/header';
+import { SignForm } from '@/features/user';
+import { Main } from '@/features/user/styles';
 
-type Props = {
-  authenticated: boolean
-}
-
-function Home({ authenticated }: Props) {
-  const router = useRouter();
-
-  useEffect(() => {
-    if (authenticated) {
-      router.push('/dashboard')
-    }
-  }, [authenticated, router])
-
+function Sign() {
   return (
     <>
       <Head>
@@ -36,16 +22,18 @@ function Home({ authenticated }: Props) {
           href="/favicon.ico"
         />
       </Head>
-
+      <Header
+        url='/sign'
+        withMenu={false}
+      />
       <Main>
-        <Toaster />
+        <SignForm />
       </Main>
     </>
   );
 }
 
-export default Home;
-
+export default Sign;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await parseCookies(ctx)['auth::token'];
@@ -55,9 +43,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       props: {
         authenticated: false
       },
-      redirect: {
-        destination: '/sign'
-      }
     }
   }
 

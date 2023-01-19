@@ -81,7 +81,8 @@ export function SignUp() {
           )}
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: 'flex-end' }}>
-          <Button variant="green"
+          <Button
+            variant="green"
             type="submit"
           >
             Cadastrar

@@ -40,7 +40,13 @@ const authentication = (req: FastifyRequest, rep: FastifyReply, next: Function) 
       }
     });
   } catch (error: any) {
-    return rep.code(400).send(new Kaboom(error));
+    const err = {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+      isAutenticated: false,
+    };
+    return rep.code(400).send(err);
   } finally {
     next();
   }

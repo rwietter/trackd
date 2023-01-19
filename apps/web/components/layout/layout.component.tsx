@@ -16,7 +16,10 @@ const Layout: FC<IProps> = ({ children }) => {
   const { menu } = useMenu() as MenuStore;
   const { isMounted } = useMount();
 
-  if (!isMounted) return <Spinner center size='small' />
+  if (!isMounted) return <Spinner
+    center
+    size='small'
+                         />
 
   return (
     <Wrapper>

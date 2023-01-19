@@ -14,19 +14,22 @@ const MenuItem = () => {
     <MenuITemsLayout>
       <Items>
         <Item className={isActive('/dashboard')}>
-          <HomeIcon width="25"
+          <HomeIcon
+            width="25"
             height="25"
           />
           <Link href="/dashboard">Dashboard</Link>
         </Item>
         <Item className={isActive('/cadastrar')}>
-          <PlusPlusIcon width="25"
+          <PlusPlusIcon
+            width="25"
             height="25"
           />
           <Link href="/cadastrar">Cadastrar</Link>
         </Item>
         <Item className={isActive('/editar')}>
-          <EditIcon width="25"
+          <EditIcon
+            width="25"
             height="25"
           />
           <Link href="/editar">Editar</Link>

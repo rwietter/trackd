@@ -34,8 +34,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (!session) {
     return {
+      props: {
+        authenticated: false
+      },
       redirect: {
-        destination: '/',
+        destination: '/sign',
         permanent: false,
       }
     }

@@ -121,7 +121,10 @@ export const TableWeek: FC<IProps> = ({ date }) => {
           size='md'
           color='secondary'
         >
-          {loading ? <Spinner size='small' center={false} /> : 'Excluir'}
+          {loading ? <Spinner
+            size='small'
+            center={false}
+                     /> : 'Excluir'}
         </Button>
       </ButtonWrapper>
 

@@ -125,7 +125,8 @@ export const EditSchedule: FC<IProps> = ({ date }) => {
   }
 
   return (
-    <Form form={form}
+    <Form
+      form={form}
       component={false}
       onSubmitCapture={() => save(editingKey)}
     >
@@ -148,7 +149,10 @@ export const EditSchedule: FC<IProps> = ({ date }) => {
           onClick={handleEditSchedule}
           size='md'
         >
-          {loading ? <Spinner size='small' center={false} /> : 'Editar'}
+          {loading ? <Spinner
+            size='small'
+            center={false}
+                     /> : 'Editar'}
         </Button>
         <Button
           type='reset'

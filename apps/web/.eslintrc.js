@@ -43,7 +43,8 @@ module.exports = {
   rules: {
     // ------- favorite rules -------
     "react/jsx-indent": ["error", 2],
-    "react/jsx-max-props-per-line": [1, { maximum: 2  }],
+    "react/jsx-max-props-per-line": [1, { maximum: 1 }],
+    "react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-closing-bracket-location": ["error", "tag-aligned"],
     'newline-per-chained-call': ["error", { ignoreChainWithDepth: 3 }],

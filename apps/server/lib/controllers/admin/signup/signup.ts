@@ -26,6 +26,12 @@ const signUp = async (req: FastifyRequest, reply: FastifyReply) => {
         email,
         password: hashedPassword,
         name,
+        city: 'Constantina',
+        state: 'Rio Grande do Sul',
+        country: 'RS',
+        phone: '3000000000',
+        username: 'rwietter',
+        work: 'Developer',
       },
     });
 

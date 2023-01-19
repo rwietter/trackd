@@ -29,14 +29,23 @@ function App({ Component, pageProps }: AppProps): ReactNode {
     <div>
       <Head>
         <Head>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+          />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
             crossOrigin=""
           />
-          <link rel="preconnect" href="https://rsms.me/" />
-          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+          <link
+            rel="preconnect"
+            href="https://rsms.me/"
+          />
+          <link
+            rel="stylesheet"
+            href="https://rsms.me/inter/inter.css"
+          />
         </Head>
       </Head>
       <Component {...pageProps} />

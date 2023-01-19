@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 import { parseCookies } from 'nookies';
 
@@ -8,13 +9,18 @@ import { TableWeek } from '@/features/dashboard';
 import {  HeaderDashboard, Title } from '@/features/dashboard/styles';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
 
-const Dashboard = () => {
+const Dashboard = ({ authenticated }: any) => {
   const [date, onChangeDate, disableDate] = useIsoWeek({ flag: 'delete' });
+  const router = useRouter();
+
+  if (!authenticated) {
+    router.push('/sign')
+  }
 
   return (
     <Layout>
       <HeaderDashboard>
-        <Title>Semana atual</Title>
+        <Title>Semana</Title>
         <DatePicker
           onChangeDate={onChangeDate}
           disableDate={disableDate as (curr: unknown) => boolean[]}
@@ -32,8 +38,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   if (!session) {
     return {
+      props: {
+        authenticated: false
+      },
       redirect: {
-        destination: '/',
+        destination: '/sign',
         permanent: false,
       }
     }
