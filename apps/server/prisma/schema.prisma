@@ -16,11 +16,11 @@ model Admin {
   username  String   @unique @map("username")
   name      String   @map("name")
   password  String
-  city      String   @map("city")
-  state     String   @map("state")
-  country   String   @map("country")
-  phone     String   @map("phone")
-  work     String   @map("work")
+  city      String?   @map("city")
+  state     String?   @map("state")
+  country   String?   @map("country")
+  phone     String?   @map("phone")
+  work     String?   @map("work")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
