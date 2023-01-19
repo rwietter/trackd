@@ -127,10 +127,10 @@ export const Fieldset = styled('fieldset', {
 });
 
 export const Label = styled('label', {
-  fontSize: 15,
+  fontSize: '15px',
   lineHeight: 1,
   marginBottom: 10,
-  color: violet.violet12,
+  color: '$text',
   display: 'block',
 });
 

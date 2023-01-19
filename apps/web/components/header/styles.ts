@@ -1,6 +1,9 @@
-import { st } from 'ui';
+/* eslint-disable import/order */
+import { styled } from '@/features/ui/theme';
+import MenuIcon from 'public/assets/menu';
+import MenuOpenIcon from 'public/assets/menu-open';
 
-export const Header = st("header", {
+export const Header = styled("header", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -12,22 +15,30 @@ export const Header = st("header", {
   transition: '$transitonTheme, border 350ms ease 0s',
 });
 
-export const RightContainer = st("div", {
+export const RightContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 });
 
-export const Trackd = st("h2", {
+export const MenuOpen = styled(MenuOpenIcon, {
+  marginRight: "1rem",
+});
+
+export const MenuClose = styled(MenuIcon, {
+  marginRight: "1rem",
+});
+
+export const Trackd = styled("h2", {
   all: "unset",
-  fontSize: "1.5rem",
-  paddingLeft: "1.3rem",
+  fontSize: "1.4rem",
   fontFamily: "$sans",
   fontWeight: 900,
+  cursor: "pointer",
   textGradient: "linear-gradient(90deg, #FF5F6D 0%, #FFC371 100%)",
 });
 
-export const Toggle = st("button", {
+export const Toggle = styled("button", {
   background: 'none',
   color: '$text',
   outline: 'none',

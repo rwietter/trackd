@@ -59,6 +59,6 @@ export const Item = st('div', {
     border: '1px solid $borderColor',
   },
   '&.active a': {
-    color: '$zen1',
+    color: '$textActive',
   },
 });

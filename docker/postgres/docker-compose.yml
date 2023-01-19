@@ -1,0 +1,10 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: rwietter
+      POSTGRES_PASSWORD: rwietter
+      POSTGRES_DB: trackd
+    ports:
+      - "5432:5432"

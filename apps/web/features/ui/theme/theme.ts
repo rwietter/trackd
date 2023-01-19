@@ -6,12 +6,12 @@ const {
   styled,
   keyframes,
   css,
+  getCssText
 } = createStitches({
   theme: {
     colors: {
       background: '#0c0c0e',
-      mediumBackground:
-       'linear-gradient(to right top, #0c0c0e, #0e0e10, #0f0f11, #111113, #121214 );',
+      mediumBackground: '#fff',
       gradient:
        'linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8257e5, #3a86ff );',
       highlight145: 'linear-gradient(145deg, #8257e5, #c1b);',
@@ -24,10 +24,11 @@ const {
       gray300: '#121214',
       gray400: '#0C0C0E',
       primary: '#74ebd5',
+      input: '#e1e1e1',
       primaryHover: '#A6F2E4',
       secondary: '#8257e5',
       tertiary: '#eea3b4',
-      separator: '#1B1B1E',
+      separator: '#FFFFFF',
       tooltip: '#ff006e',
       buttonThumb: '#F4F4F6',
       white: '#F4F4F6',
@@ -85,8 +86,7 @@ const { theme: lightTheme } = createStitches({
   theme: {
     colors: {
       background: '#F2F5FA',
-      mediumBackground:
-        'linear-gradient(to left top, #C9C9CF, #D7D7DB, #E1E1E4, #F4F4F6, #F7F7F7 );',
+      mediumBackground: '#141419',
       gradient:
         'linear-gradient(90deg, #ffbe0b, #fb5607, #ff006e, #8257e5, #3a86ff );',
       highlight145: 'linear-gradient(145deg, #8257e5, #c1b);',
@@ -97,10 +97,11 @@ const { theme: lightTheme } = createStitches({
       gray300: '#D7D7DB',
       gray400: '#C9C9CF',
       primary: '#3a86ff',
+      input: '#e1e1e1',
       primaryHover: '#7AAEFF',
       secondary: '#8257e5',
       tertiary: '#b15cdd',
-      separator: '#C9C9CF',
+      separator: '#222',
       tooltip: '#8257e5',
       white: '#FFFFFF',
       dark: '#14121F',
@@ -133,5 +134,5 @@ const { theme: lightTheme } = createStitches({
 });
 
 export {
-  darkTheme, lightTheme, styled, css, keyframes,
+  darkTheme, lightTheme, styled, css, keyframes, getCssText
 };

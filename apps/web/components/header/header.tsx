@@ -1,18 +1,24 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable import-helpers/order-imports */
-import React from 'react';
+import { FC } from 'react';
 
-import MenuIcon from 'public/assets/menu';
-import MenuOpenIcon from 'public/assets/menu-open';
 import { DarkIcon, LightIcon } from 'ui';
+import { useRouter } from 'next/router';
 import { useMount } from '@/hooks/useMount';
 
 import { MenuStore, useMenu, useTheme, ThemeStore } from '../../store';
 import * as S from './styles';
 
-const Header: React.FC = () => {
+type Props = {
+  withMenu?: boolean;
+  url?: '/dashboard' | '/' | '/sign' | '/editar' | '/admin' | '/cadastrar';
+}
+
+const Header: FC<Props> = ({ withMenu = true, url = '/dashboard' }) => {
   const { isMounted } = useMount();
   const { menu, setMenu } = useMenu() as MenuStore;
   const { theme, setTheme } = useTheme() as ThemeStore;
+  const router = useRouter();
 
   const handleMenu = () => {
     if (setMenu) setMenu(menu === 'open' ? 'closed' : 'open');
@@ -24,13 +30,18 @@ const Header: React.FC = () => {
 
   if (!isMounted) return <div />
 
-  const MenuIconComponent = !menu || menu === 'open' ? MenuOpenIcon : MenuIcon;
+  const MenuIconComponent = !menu || menu === 'open' ? S.MenuOpen : S.MenuClose;
+
+  const handleNavigation = () =>  router.push(url);
 
   return (
     <S.Header>
       <S.RightContainer>
-        <MenuIconComponent onClick={handleMenu} />
-        <S.Trackd>Trackd</S.Trackd>
+        { withMenu && <MenuIconComponent onClick={handleMenu} /> }
+        <S.Trackd
+          role="button"
+          onClick={handleNavigation}
+        >Trackd</S.Trackd>
       </S.RightContainer>
       <S.Toggle onClick={handleTheme}>
         {theme.match('light') ? <DarkIcon /> : <LightIcon />}
