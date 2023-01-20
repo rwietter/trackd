@@ -1,14 +1,16 @@
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
 
 import { Divider } from 'antd';
 
-import { parseCookies } from 'nookies';
+// import { parseCookies } from 'nookies';
 
 import { DatePicker } from '@/components/datepicker';
 import { Layout } from '@/components/layout';
 import { TableRegisterRecord } from '@/features/create-record';
 import { Header, Title } from '@/features/create-record/styles';
 import { useIsoWeek } from '@/hooks/useIsoWeek';
+
+import withAuth from '../../hoc/withAuth';
 
 const RegisterRecord = () => {
   const [date, onChangeDate, disableDates] = useIsoWeek();
@@ -28,27 +30,27 @@ const RegisterRecord = () => {
   )
 }
 
-export default RegisterRecord;
+export default withAuth(RegisterRecord);
 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = parseCookies(ctx)['auth::token'];
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const session = parseCookies(ctx)['auth::token'];
 
-  if (!session) {
-    return {
-      props: {
-        authenticated: false
-      },
-      redirect: {
-        destination: '/sign',
-        permanent: false,
-      }
-    }
-  }
+//   if (!session) {
+//     return {
+//       props: {
+//         authenticated: false
+//       },
+//       redirect: {
+//         destination: '/sign',
+//         permanent: false,
+//       }
+//     }
+//   }
 
-  return {
-    props: {
-      authenticated: true
-    },
-  }
-}
+//   return {
+//     props: {
+//       authenticated: true
+//     },
+//   }
+// }

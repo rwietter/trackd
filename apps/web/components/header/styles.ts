@@ -35,7 +35,7 @@ export const Trackd = styled("h2", {
   fontFamily: "$sans",
   fontWeight: 900,
   cursor: "pointer",
-  textGradient: "linear-gradient(90deg, #FF5F6D 0%, #FFC371 100%)",
+  color: "$text",
 });
 
 export const Toggle = styled("button", {

@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import type { FastifyInstance } from 'fastify';
-import { editAdmin, indexAdmin } from '../controllers/admin/admin';
+import { editAdmin, indexAdmin, deleteAdmin } from '../controllers/admin/admin';
 
 import {
   createSchedule, indexSchedule, deleteSchedule, editSchedule,
@@ -22,6 +22,7 @@ const adminRoutes = async (app: FastifyInstance) => {
 
   app.get('/admin', { preHandler: authentication }, indexAdmin);
   app.put('/admin', { preHandler: authentication }, editAdmin);
+  app.delete('/admin', { preHandler: authentication }, deleteAdmin);
 
   app.post('/admin/create-schedule', { preHandler: authentication }, createSchedule);
 

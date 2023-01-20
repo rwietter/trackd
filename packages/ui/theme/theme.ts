@@ -102,7 +102,7 @@ const {
 const { theme: lightTheme } = createStitches({
   theme: {
     colors: {
-      background: '#F3FAF8',
+      background: '#F9F9FB',
       mediumBackground: '#FFFFFF',
       mediumBackgroundHover: '#F9F9FB',
       card: '#FFFFFF',

@@ -7,24 +7,25 @@ export const Button = st('button', {
   fontFamily: 'Raleway, sans-serif',
   fontWeight: '600',
   textAlign: 'center',
+  padding: '0 20px',
   transition: 'all .15s cubic-bezier(0.645, 0.045, 0.355, 1) 0s',
 
   variants: {
     size: {
       sm: {
         fontSize: '16px',
-        width: '100px',
-        height: '35px',
+        width: 'auto',
+        height: '30px',
       },
       md: {
         fontSize: '18px',
-        width: '150px',
-        height: '40px',
+        width: 'auto',
+        height: '35px',
       },
       lg: {
         fontSize: '21px',
-        width: '200px',
-        height: '50px',
+        width: 'auto',
+        height: '40px',
       },
     },
     bg: {

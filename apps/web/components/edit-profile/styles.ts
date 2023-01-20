@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Modal as AntdModal } from 'antd';
 
 import { styled } from "@/features/ui/theme"
@@ -19,13 +20,14 @@ export const CoverImage = styled('img', {
 
 export const Modal = styled(AntdModal, {
   background: '$background',
+  borderRadius: '6px !important',
   '.ant-modal-close-x': {
     color: '$text',
   },
   '.ant-modal-content, .ant-modal-header': {
-    borderRadius: '8px',
     background: '$background !important',
     border: 'none !important',
+    boxShadow: 'none !important',
     '.ant-modal-title': {
       color: '$text',
     }
@@ -36,7 +38,19 @@ export const Modal = styled(AntdModal, {
 
   '.ant-modal-footer': {
     border: 'none !important',
-  }
+    padding: '0 1.8rem',
+    textAlign: 'left',
+
+    'button + button': {
+      marginTop: '0.5rem',
+    },
+
+    "@media(min-width:325px)": {
+      'button + button': {
+        marginLeft: '1rem',
+      },
+    }
+  },
 })
 
 export const Form = styled('form', {

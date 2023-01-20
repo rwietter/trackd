@@ -2,7 +2,6 @@
 /* eslint-disable consistent-return */
 import { FastifyReply, FastifyRequest } from 'fastify';
 import JWT from 'jsonwebtoken';
-import { Kaboom } from '../helpers';
 
 const authentication = (req: FastifyRequest, rep: FastifyReply, next: Function) => {
   try {
