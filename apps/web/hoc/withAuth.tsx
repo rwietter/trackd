@@ -32,28 +32,26 @@ const isSecurityRoute = async (token: string) => {
   }
 }
 
-const withAuth = <P extends Props>(Component: React.ComponentType<P>) => {
-  return (props: P) => {
+const withAuth = (Component: any) => {
+  return (props: any) => {
     useEffect(() => {
       const token = parseCookies()[Constants.AUTH_TOKEN];
 
       if (!token) {
         destroyCookie(undefined, Constants.AUTH_TOKEN)
         window.location.href = '/sign'
-      }
+      } else { 
+        const verifySecurity = async () => { 
+          const isSecurity = await isSecurityRoute(token);
 
-      const verifySecurity = async () => { 
-        const isSecurity = await isSecurityRoute(token);
-
-        console.log('isSecurity', isSecurity)
-        
-        if(!isSecurity) {
-          destroyCookie(undefined, Constants.AUTH_TOKEN)
-          window.location.href = '/sign'
+          if(!isSecurity) {
+            destroyCookie(undefined, Constants.AUTH_TOKEN)
+            window.location.href = '/sign'
+          }
         }
-      }
 
-      verifySecurity();
+        verifySecurity();
+      }
     }, []);
     return <Component {...props} />;
   };
