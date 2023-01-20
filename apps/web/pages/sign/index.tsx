@@ -36,7 +36,7 @@ function Sign() {
 export default Sign;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await parseCookies(ctx)['auth::token'];
+  const session = parseCookies(ctx)['auth::token'];
 
   if (!session) {
     return {

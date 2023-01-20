@@ -29,6 +29,7 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
@@ -97,3 +98,28 @@ a {
 .ant-picker-cell-disabled.ant-picker-cell-today .ant-picker-cell-inner::before {
   border: 2px solid var(--colors-text) !important;
 }
+
+.ant-modal,
+.ant-modal-content,
+.ant-modal-header {
+  border-radius: 6px !important;
+}
+
+/* .ant-popover-inner {
+  border-radius: 6px !important;
+  background: var(--colors-mediumBackground) !important;
+}
+
+.ant-popover-inner-content .ant-popover-message {
+  color: var(--colors-text) !important;
+}
+
+.ant-popover-buttons button {
+  background: var(--colors-background) !important;
+  color: var(--colors-text) !important;
+}
+
+.ant-popover-arrow-content {
+  background: var(--colors-mediumBackground) !important;
+  --antd-arrow-background-color: var(--colors-mediumBackground) !important;
+} */

@@ -11,17 +11,17 @@ datasource db {
 }
 
 model Admin {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique @map("username")
-  name      String   @map("name")
+  id        String    @id @default(cuid())
+  email     String    @unique
+  username  String    @unique @map("username")
+  name      String    @map("name")
   password  String
   city      String?   @map("city")
   state     String?   @map("state")
   country   String?   @map("country")
   phone     String?   @map("phone")
-  work     String?   @map("work")
-  createdAt DateTime @default(now()) @map("created_at")
+  work      String?   @map("work")
+  createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("admin")

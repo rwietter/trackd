@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/no-unused-prop-types */
 import React, { FC, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { CiGrid41, CiLocationOn, CiTimer } from 'react-icons/ci';
 
-import { GetServerSideProps } from 'next';
+// import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 import { Row } from 'antd';
 
@@ -13,7 +15,9 @@ import { EditProfile } from '@/components/edit-profile';
 import { Header } from '@/components/header';
 import { api } from '@/services/api';
 
+import { Constants } from '../../constants';
 import * as S from '../../features/admin/styles'
+import withAuth from '../../hoc/withAuth';
 import { AdminStore, useAdmin } from '../../store';
 
 type Props = {
@@ -39,6 +43,7 @@ const parseDate = (dateString: string) => {
 
 const AdminProfile: FC<Props> = () => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const { setAdmin, admin }  = useAdmin() as AdminStore;
 
   const closeModal = () => setOpen(false);
@@ -48,7 +53,7 @@ const AdminProfile: FC<Props> = () => {
     try {
       const response = await api.get('/admin', {
         headers: {
-          Authorization: `Bearer ${parseCookies()['auth::token']}`,
+          Authorization: `Bearer ${parseCookies()[Constants.AUTH_TOKEN]}`,
         }
       });
 
@@ -56,7 +61,7 @@ const AdminProfile: FC<Props> = () => {
         setAdmin(response.data);
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Ocorreu um erro ao obter seu perfil. Tente fazer login novamente!');
     }
   }
 
@@ -122,26 +127,26 @@ const AdminProfile: FC<Props> = () => {
   );
 };
 
-export default AdminProfile;
+export default withAuth(AdminProfile);
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = parseCookies(ctx)['auth::token'];
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const session = parseCookies(ctx)['auth::token'];
 
-  if (!session) {
-    return {
-      props: {
-        authenticated: false
-      },
-      redirect: {
-        destination: '/sign',
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       props: {
+//         authenticated: false
+//       },
+//       redirect: {
+//         destination: '/sign',
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      authenticated: true,
-    }
-  }
-}
+//   return {
+//     props: {
+//       authenticated: true,
+//     }
+//   }
+// }

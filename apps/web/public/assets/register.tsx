@@ -12,7 +12,6 @@ const PlusPlusIcon: FC<IProps> = ({ width, height, ...props }) => (
   >
     <g
       id="Circle_Plus"
-      data-name="Circle Plus"
     >
       <g>
         <path

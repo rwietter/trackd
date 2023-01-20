@@ -1,16 +1,20 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/no-unused-prop-types */
 import { FC, useEffect, useReducer } from 'react';
 import { toast } from 'react-hot-toast';
 
-import {  Row } from 'antd';
+import { useRouter } from 'next/router';
 
-import { parseCookies } from 'nookies';
+import { Row, Popconfirm } from 'antd';
+
+import { parseCookies, destroyCookie } from 'nookies';
 
 import { Button } from '@/features/ui/button';
 import { Label } from '@/features/user/styles';
 import { api } from '@/services/api';
 
+import { Constants } from '../../constants';
 import { AdminStore, useAdmin } from '../../store';
 import * as S from './styles';
 
@@ -22,7 +26,8 @@ type Props = {
 const IMAGE = "https://images.unsplash.com/photo-1670502368091-7ecb110e2fe5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1075&q=80"
 
 const EditProfile: FC<Props> = ({ open, closeModal }) => {
-  const { setAdmin, admin }  = useAdmin() as AdminStore;
+  const { setAdmin, admin } = useAdmin() as AdminStore;
+  const router = useRouter();
   const [user, setUser] = useReducer((state: Admin, newState: Partial<Admin>): Admin => ({
     ...state,
     ...newState
@@ -35,7 +40,7 @@ const EditProfile: FC<Props> = ({ open, closeModal }) => {
   }, [admin]);
 
 
-  const handleSubmit = async () => { 
+  const handleSubmitEditAccount = async () => { 
     try {
       const response = await api.put(`/admin`, {
         user: {
@@ -53,9 +58,31 @@ const EditProfile: FC<Props> = ({ open, closeModal }) => {
       if (response?.data) {
         setAdmin(response.data.user);
         toast.success('Perfil atualizado com sucesso!');
+        closeModal();
       }
     } catch (error) {
       toast.error('Ocorreu um erro ao atualizar o perfil. Tente novamente!');
+    }
+  }
+
+  const handleDeleteAccount = async () => { 
+    try {
+      const response = await api.delete(`/admin`, {
+        headers: {
+          Authorization: `Bearer ${parseCookies()['auth::token']}`,
+        },
+        params: {
+          id: user.id,
+        }
+      });
+
+      if (response?.status === 200) {
+        toast.success('Conta deletada com sucesso!');
+        destroyCookie(null, Constants.AUTH_TOKEN);
+        router.push('/sign');
+      }
+    } catch (error) {
+      toast.error('Ocorreu um erro ao deletar a conta. Tente novamente!');
     }
   }
 
@@ -68,13 +95,31 @@ const EditProfile: FC<Props> = ({ open, closeModal }) => {
         <Button
           key="submit"
           type="button"
-          onClick={handleSubmit}
+          onClick={handleSubmitEditAccount}
         >
           Salvar
-        </Button>
+        </Button>,
+        <Popconfirm
+          key="submit"
+          title="Tem certeza que deseja deletar a conta? A ação não pode ser desfeita."
+          okType="danger"
+          cancelText="Não"
+          okText="Sim"
+          onCancel={() => { }}
+          onConfirm={handleDeleteAccount}
+        >
+          <Button
+            key="submit"
+            type="button"
+            color='secondary'
+          >
+            Deletar Conta
+          </Button>
+        </Popconfirm>
+        
         ]}
     >
-      <S.Form onSubmit={handleSubmit}>
+      <S.Form onSubmit={handleSubmitEditAccount}>
         <Row>
           <S.CoverImage src={IMAGE} />
         </Row>
@@ -114,6 +159,7 @@ const EditProfile: FC<Props> = ({ open, closeModal }) => {
           </S.ProfileContent>
         </Row>
       </S.Form>
+      
     </S.Modal>
   );
 };
