@@ -266,3 +266,355 @@ paths:
                     type: number
                   stack:
                     type: string
+  /admin/delete-schedule:
+    delete:
+      description: 'Delete week agenda'
+      tags:
+        - Admin
+      parameters:
+        - name: isoWeek
+          in: query
+          description: Number of the week of the year to be deleted is required
+          required: true
+          schema:
+            type: string
+        - name: isoYear
+          in: query
+          description: Year to be deleted is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Returns the deleted week schedule'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
+  /admin/edit-schedule:
+    put:
+      description: 'Edit week agenda'
+      tags:
+        - Admin
+      parameters:
+        - name: isoWeek
+          in: query
+          description: Number of the week of the year to be edited is required
+          required: true
+          schema:
+            type: string
+        - name: isoYear
+          in: query
+          description: Year to be edited is required
+          required: true
+          schema:
+            type: string
+        - name: week
+          in: query
+          description: Week schema to be edit schedule
+          required: true
+          schema:
+            type: object
+            properties:
+              mondayRecord:
+                type: string
+              tuesdayRecord:
+                type: string
+              wednesdayRecord:
+                type: string
+              thursdayRecord:
+                type: string
+              fridayRecord:
+                type: string
+        - name: weekAvailable
+          in: query
+          description: Week available schema to be edit schedule
+          required: true
+          schema:
+            type: object
+            properties:
+              mondayRecordAvailable:
+                type: string
+              tuesdayRecordAvailable:
+                type: string
+              wednesdayRecordAvailable:
+                type: string
+              thursdayRecordAvailable:
+                type: string
+              fridayRecordAvailable:
+                type: string
+      responses:
+        200:
+          description: 'Returns the edited week schedule'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
+  /admin/get-admin:
+    get:
+      description: 'Get data from admin'
+      tags:
+        - Admin
+      parameters:
+        - name: token
+          in: query
+          description: Token of the admin is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Returns the admin data'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  payload:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      surname:
+                        type: string
+                      role:
+                        type: string
+                      _id:
+                        type: string
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
+  /admin/edit:
+    put:
+      description: 'Edit data from admin'
+      tags:
+        - Admin
+      parameters:
+        - name: token
+          in: query
+          description: Token of the admin is required
+          required: true
+          schema:
+            type: string
+        - name: admin
+          in: query
+          description: Admin schema to be edited
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              name:
+                type: string
+              surname:
+                type: string
+              role:
+                type: string
+      responses:
+        200:
+          description: 'Returns the edited admin data'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  payload:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      surname:
+                        type: string
+                      role:
+                        type: string
+                      _id:
+                        type: string
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
+  /admin/delete-admin:
+    delete:
+      description: 'Delete admin'
+      tags:
+        - Admin
+      parameters:
+        - name: token
+          in: query
+          description: Token of the admin is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Returns the deleted admin data'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
+  /week-schedule:
+    get:
+      description: 'Get week schedule'
+      tags:
+        - Agenda
+      parameters:
+        - name: isoWeek
+          in: query
+          description: Number of the week of the year is required
+          required: true
+          schema:
+            type: string
+        - name: isoYear
+          in: query
+          description: Year is required
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Returns the week schedule'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  payload:
+                    type: object
+                    properties:
+                      mondayRecord:
+                        type: string
+                      tuesdayRecord:
+                        type: string
+                      wednesdayRecord:
+                        type: string
+                      thursdayRecord:
+                        type: string
+                      fridayRecord:
+                        type: string
+                example:
+                 ok: true
+        400:
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+                  statusCode:
+                    type: number
+                  stack:
+                    type: string
