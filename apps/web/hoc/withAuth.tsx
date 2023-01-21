@@ -33,7 +33,7 @@ const isSecurityRoute = async (token: string) => {
 }
 
 const withAuth = (Component: any) => {
-  return (props: any) => {
+  return (Props: any) => {
     useEffect(() => {
       const token = parseCookies()[Constants.AUTH_TOKEN];
 
@@ -53,7 +53,7 @@ const withAuth = (Component: any) => {
         verifySecurity();
       }
     }, []);
-    return <Component {...props} />;
+    return <Component {...Props} />;
   };
 };
 
